@@ -1,0 +1,15 @@
+.defined-rules {
+  margin-top: 10px;
+}
+
+.rule {
+  margin-bottom: 30px;
+}
+
+.rule-template {
+  display: none;
+}
+
+.sub-rule {
+  margin-bottom: 20px;
+}

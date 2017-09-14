@@ -1,0 +1,24 @@
+= form_with(model: notification, local: true, id: 'notification-form') do |form|
+  - if notification.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(notification.errors.count, "error")
+        prohibited this notification from being saved:
+      %ul
+        - notification.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name, id: :'notification-name'
+  .field
+    = form.label :provider
+    = form.select :provider, Notification.providers.keys.to_a, id: :'notification-provider'
+  .field
+    = form.label :spot
+    = form.text_field :spot, id: :'notification-spot'
+  .field
+    = form.hidden_field :rules, id: :'notification-rules'
+    .rules
+      = render partial: 'rule', collection: @notification.params_with_rules
+  .actions
+    = form.submit
