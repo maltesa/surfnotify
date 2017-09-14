@@ -14,4 +14,11 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require selectize
 //= require_tree .
+
+document.addEventListener('turbolinks:load', function() {
+  $('select').selectize({
+    plugins: ['remove_button']
+  });
+});

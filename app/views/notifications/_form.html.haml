@@ -15,7 +15,7 @@
     = form.select :provider, Notification.providers.keys.to_a, id: :'notification-provider'
   .field
     = form.label :spot
-    = form.text_field :spot, id: :'notification-spot'
+    = form.text_field :spot, id: :'notification-spot', class: 'autocomplete'
   .field
     = form.hidden_field :rules, id: :'notification-rules'
     .rules

@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'haml'
 gem 'jquery-rails'
+gem 'selectize-rails'
 
 # Providers
 gem 'msw'
