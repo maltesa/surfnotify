@@ -1,3 +1,9 @@
+GIT
+  remote: https://bitbucket.org/surfnotify/dataprovider-msw
+  revision: 2686537f09500c747a53de5843234c30c955c4d7
+  specs:
+    msw (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -99,7 +105,6 @@ GEM
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
-    msw (0.0.1)
     multi_json (1.12.2)
     nio4r (2.1.0)
     nokogiri (1.8.0)
@@ -206,7 +211,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
-  msw
+  msw!
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.2)
@@ -221,4 +226,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
