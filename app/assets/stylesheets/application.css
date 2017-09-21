@@ -12,6 +12,7 @@
  *
  *= require selectize
  *= require selectize.default
+ *= require simple-grid
  *= require_tree .
  *= require_self
  */

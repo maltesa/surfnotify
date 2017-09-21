@@ -1,15 +1,20 @@
+
+  <div class="row">
 <p id="notice"><%= notice %></p>
 
-<h1>Notifications</h1>
+<h3>Notification Overview</h3>
 
 <table>
   <thead>
     <tr>
+      <th>Alert</th>
       <th>Name</th>
-      <th>Provider</th>
       <th>Spot</th>
-      <th>Rules</th>
-      <th>User</th>
+      <th>Swellheight</th>
+      <th>Breakingsize</th>
+      <th>Wavedirection</th>
+      <th>Windspeed</th>
+      <th>Winddirection</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,14 +22,18 @@
   <tbody>
     <% @notifications.each do |notification| %>
       <tr>
-        <td><%= notification.name %></td>
-        <td><%= notification.provider %></td>
-        <td><%= notification.spot %></td>
-        <td><%= notification.rules %></td>
-        <td><%= notification.user %></td>
-        <td><%= link_to 'Show', notification %></td>
-        <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="possiblealert">TOMORROW</td>
+        <td class="spot"><%= notification.name %></td>
+        <td class="spot"><%= notification.spot %></td>
+        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:swell_size] %> <span class= "metric">(min 0.5m)</span></td>
+        <td><i class="fa fa-circle no"></i> <%= notification.rules[:breaking_size] %></td>
+        <td><i class="fa fa-circle no"></i> <%= notification.rules[:swell_dir] %> <span class= "metric">(SW-NW)</span></td>
+        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:wind_speed] %> <span class= "metric">(max 25 kmh)</span></td>
+        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:wind_dir] %> <span class= "metric">(0)</span></td>
+        <td class="edit"><%= link_to edit_notification_path(notification) do %><i class="fa fa-edit"></i><% end %></td>
+        <td class="edit"><%= link_to notification, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fa fa-trash"></i><% end %></td>
+
+
       </tr>
     <% end %>
   </tbody>
@@ -33,3 +42,4 @@
 <br>
 
 <%= link_to 'New Notification', new_notification_path %>
+</div>
