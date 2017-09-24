@@ -15,9 +15,13 @@
   %strong User:
   = @notification.user
 %p
-  - @matching_forecasts.each do |day|
-    = "Match on #{l day[:time]}"
+  - @matching_forecasts.each do |unit|
+    = "Match on #{l unit[:time], format: :long}"
     %br
+    - @notification.activated_rules_with_params.each do |rule|
+      = "#{rule[:name]}: #{unit[rule[:key]]}"
+      %br
+    %hr
 = link_to 'Edit', edit_notification_path(@notification)
 |
 = link_to 'Back', notifications_path

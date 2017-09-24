@@ -7,6 +7,14 @@ class Notification < ApplicationRecord
   validates :name, :provider, :spot, :rules, :user, :forecast, presence: true
   validate :json_is_valid
 
+  def activated_rules
+    rules.select { |_, v| v[:activated] == true }
+  end
+
+  def activated_rules_with_params
+    params_with_rules.select { |v| v[:activated] == true }
+  end
+
   # relate forecast corresponding to spot
   def create_missing_forecast
     forecast = Forecast.find_by(spot: spot, provider: provider)
