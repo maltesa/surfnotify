@@ -10,19 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911155700) do
+ActiveRecord::Schema.define(version: 20170924134228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forecasts", force: :cascade do |t|
+    t.integer "provider", default: 0
+    t.string "spot"
+    t.jsonb "forecast", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spot", "provider"], name: "index_forecasts_on_spot_and_provider", unique: true
+  end
 
   create_table "notifications", force: :cascade do |t|
     t.string "name"
     t.integer "provider", default: 0
     t.string "spot"
-    t.json "rules"
+    t.jsonb "rules", default: {}, null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["spot"], name: "index_notifications_on_spot"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 

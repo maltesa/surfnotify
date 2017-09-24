@@ -38,7 +38,7 @@ gem 'jquery-rails'
 gem 'selectize-rails'
 
 # Providers
-gem 'msw'
+gem 'msw', git: 'git@bitbucket.org:surfnotify/dataprovider-msw.git', branch: 'master'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

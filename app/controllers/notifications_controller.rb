@@ -10,6 +10,7 @@ class NotificationsController < ApplicationController
   # GET /notifications/1
   # GET /notifications/1.json
   def show
+    @matching_forecasts = @notification.matching_forecasts
   end
 
   # GET /notifications/new
@@ -18,8 +19,7 @@ class NotificationsController < ApplicationController
   end
 
   # GET /notifications/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /notifications
   # POST /notifications.json
@@ -63,13 +63,14 @@ class NotificationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_notification
-      @notification = Notification.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def notification_params
-      params.require(:notification).permit(:name, :provider, :spot, :rules)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_notification
+    @notification = Notification.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def notification_params
+    params.require(:notification).permit(:name, :provider, :spot, :rules)
+  end
 end

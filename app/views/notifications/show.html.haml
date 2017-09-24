@@ -1,0 +1,23 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @notification.name
+%p
+  %strong Provider:
+  = @notification.provider
+%p
+  %strong Spot:
+  = @notification.spot
+%p
+  %strong Rules:
+  = @notification.rules
+%p
+  %strong User:
+  = @notification.user
+%p
+  - @matching_forecasts.each do |day|
+    = "Match on #{l day[:time]}"
+    %br
+= link_to 'Edit', edit_notification_path(@notification)
+|
+= link_to 'Back', notifications_path

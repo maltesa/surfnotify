@@ -1,11 +1,17 @@
 .rule
+  = rule
   = label :name, rule[:name]
   - if rule[:type] == :range_slider
-    = hidden_field_tag rule[:key], rule[:value], class: 'range-slider', id: rule[:key],
+    = hidden_field_tag rule[:key], rule[:value], class: 'range-slider rule-value', id: rule[:key],
       'data-scale': rule[:values].to_json, 'data-from': rule[:values].min,
       'data-to': rule[:values].max
   - elsif rule[:type] == :select
-    = select_tag rule[:key], options_for_select(rule[:values], rule[:value]), id: rule[:key]
+    = select_tag rule[:key], options_for_select(rule[:values], rule[:value]), id: rule[:key],
+      class: 'rule-value'
   - elsif rule[:type] == :select_mult
     = select_tag rule[:key], options_for_select(rule[:values], rule[:value]), id: rule[:key],
-      multiple: true
+      multiple: true, class: 'rule-value'
+  %br
+  %label
+    activated
+    = check_box_tag "#{rule[:key]}_activated", '1', rule[:activated], class: 'activated'
