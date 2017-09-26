@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :notifications
-  root to: 'notifications#index'
+  root to: 'pages#index'
+  get  'pages/landing', as: 'landing'
 
   get 'provider/msw/find/:query' => 'provider#msw_search_spots', as: :msw_autocomplete
 

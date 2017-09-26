@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Surfnotify</title>
+    <title>SurfNotify</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <%= render 'layouts/header' %>
+  <% if current_user %>
+  <div><%= render 'layouts/header' %></div>
+  <% end %>
+  
   <body>
-  	<div class="container">
     <%= yield %>
-    </div>
+
   </body>
 </html>

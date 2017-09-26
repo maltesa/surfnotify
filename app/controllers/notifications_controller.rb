@@ -1,10 +1,12 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @user = current_user
+    @notifications = Notification.where(user_id: @user.id)
   end
 
   # GET /notifications/1
@@ -14,18 +16,25 @@ class NotificationsController < ApplicationController
 
   # GET /notifications/new
   def new
-    @notification = Notification.new
+    @notification = current_user.notifications.build
   end
 
   # GET /notifications/1/edit
   def edit
+    @user_id = current_user.id
+      if @user_id == @notification.user_id
+
+      else
+        redirect_to root_url, notice: "Acess Restricted, please choose a notification that you have created and have acess to"
+      end
   end
 
   # POST /notifications
   # POST /notifications.json
   def create
-    @notification = Notification.new(notification_params)
+    @notification = current_user.notifications.build(notification_params)
     @notification.user = current_user
+    @user = current_user
 
     respond_to do |format|
       if @notification.save

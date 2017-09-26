@@ -1,3 +1,7 @@
 <div class="logorow">
-          <a href=".."><img src="https://c1.staticflickr.com/9/8376/8433224810_68f092d303.jpg" class="logo"></a><a href=".."><h1 class="strong-name" style="display: inline-block;">SURF <span class="light-name">NOTIFY</span></h1></a>
+          <a href=".."><%= image_tag("logo.png", class: "logo", alt: "surf notify logo") %></a><a href=".."><h1 class="strong-name" style="display: inline-block;">SURF <span class="light-name">NOTIFY</span></h1></a>
+          <div class="navlink">
+          <a><%= link_to "Notifications", notifications_path, :method => :get %></a>
+          <a><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></a>
+          </div>
 </div><br>

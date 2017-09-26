@@ -1,8 +1,9 @@
-
+<div class="container">
   <div class="row">
 <p id="notice"><%= notice %></p>
 
 <h3>Notification Overview</h3>
+
 
 <table>
   <thead>
@@ -41,5 +42,6 @@
 
 <br>
 
-<%= link_to 'New Notification', new_notification_path %>
+<%= link_to raw("New Notification"), "/notifications", class: "btn-new" %>
+</div>
 </div>

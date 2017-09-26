@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SurfNotify</title>
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+  <link rel="stylesheet" type="text/css" href="./css/landing-page.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/simple-grid.css">
+
+</head>
+<body>
+
+
+
+<div class="intro-header">
+    <div class="container">
+    <div class="logorowlp">
+          <a href="./index.html"><%= image_tag("logo.png", class: "logo", alt: "surf notify logo") %></a><a href="./index.html"><h1 class="strong-name-lp" style="display: inline-block;">SURF <span class="light-name-lp">NOTIFY</span></h1></a>
+	</div>
+        <div class="row">
+            <div class="col-12">
+                <div class="intro-message">
+                    <h3><font color="white">Never miss when your<br> favorite spots are working.</font>
+                    
+                </div>
+
+                <%= link_to raw("<i class=\"fa fa-feed fa-fw\"></i>Add Notification"), "/notifications", class: "btn-leadlp" %>
+            </div>
+        </div>
+
+    <!-- /.container -->
+</div>
+</div>
+<!-- /.intro-header -->
+<br>
+<!-- Page Content -->
+
+
+
+
+
+
+    <div class="container">
+    	<div class="row lp">
+    		<h2>Choose Metrics, Get Alerts</h2>
+    		<div class="col-6">Get alerts for all the spots you are interested in, directly on your phone and never miss a good session. Set a combination of the metrics that make your spot work. Choose bewtween Swell, Swelldirection, Wind, Winddirection and more. As soon as all your criterias are met, we sent out an alert for your spot to your phone or email adress</div>
+    		<div class="col-6 right"><%= image_tag("alert.png", class: "img-responsive", alt: "surf notify alert") %></div>
+    	</div>
+
+    	<div class="row lp">
+    		<h2>Set rule combinations</h2>
+    		<div class="col-6"><%= image_tag("metrics.png", class: "img-responsive", alt: "surf notify alert") %></div>
+    		<div class="col-6 right">Choose from multiple rulesets. Want to be alerted on small swells only with offshore winds? But also an big swells where the wind is onshore? You can now do this all within one spot notification. We have all conditions covered for you.</div>
+    		
+    	</div>
+    </div>
+
+    <!-- /.container -->
+
+
+
+    <div class="content-section-a">
+
+        
+            <div class="row">
+                <h1 class="section-title">Set up your notifications now and never again miss <br>when your favorite spot is pumping :</h1><br>
+                 <div class="row">
+                 
+                <center>
+                    <%= link_to raw("<i class=\"fa fa-feed fa-fw\"></i>ADD NOTIFICATION"), "/notifications", class: "btn-leadlow" %>
+                </center>
+            </div>
+
+        
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+
+    
+    
+    <!-- /.container -->
+
+
+
+
+</div>
+<div class="footer-stripe">
+    </div>
+<!-- /.banner -->
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                
+                <p class="copyright text-muted small">2017 SurfNotify. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="bootstrap.min.js"></script>
+
+
+</body>
+</html>
