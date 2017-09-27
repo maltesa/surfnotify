@@ -19,6 +19,7 @@
       <th colspan="3"></th>
     </tr>
   </thead>
+<%-# Die Werte bisher nur als Platzhalter, Daten müssen extrahiert werden %>
 
   <tbody>
     <% @notifications.each do |notification| %>
@@ -26,11 +27,11 @@
         <td class="possiblealert">TOMORROW</td>
         <td class="spot"><%= notification.name %></td>
         <td class="spot"><%= notification.spot %></td>
-        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:swell_size] %> <span class= "metric">(min 0.5m)</span></td>
-        <td><i class="fa fa-circle no"></i> <%= notification.rules[:breaking_size] %></td>
-        <td><i class="fa fa-circle no"></i> <%= notification.rules[:swell_dir] %> <span class= "metric">(SW-NW)</span></td>
-        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:wind_speed] %> <span class= "metric">(max 25 kmh)</span></td>
-        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:wind_dir] %> <span class= "metric">(0)</span></td>
+        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:swell_size][2] %><%= notification.rules[:swell_size][3] %>m<span class= "metric">(<%= notification.rules[:swell_size][2] %>m-<%= notification.rules[:swell_size][2] %><%= notification.rules[:swell_size][3] %>m)</span></td>
+        <td><i class="fa fa-circle no"></i> <%= notification.rules[:breaking_size][2] %>m<span class= "metric">(<%= notification.rules[:breaking_size][2] %>m-<%= notification.rules[:breaking_size][2] %><%= notification.rules[:breaking_size][3] %>m)</span></td>
+        <td><i class="fa fa-circle no"></i> <%= notification.rules[:swell_dir] %> <span class= "metric">(<%= notification.rules[:swell_dir][0] %>-<%= notification.rules[:swell_dir][2...5] %>)</span></td>
+        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:wind_speed] %> <span class= "metric">(<%= notification.rules[:wind_speed][0] %>-<%= notification.rules[:wind_speed][2...5] %>kmh)</span></td>
+        <td><i class="fa fa-circle yes"></i> <%= notification.rules[:wind_dir] %> <span class= "metric">(<%= notification.rules[:wind_dir][0] %>-<%= notification.rules[:wind_dir][2...5] %>)</span></td>
         <td class="edit"><%= link_to edit_notification_path(notification) do %><i class="fa fa-edit"></i><% end %></td>
         <td class="edit"><%= link_to notification, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fa fa-trash"></i><% end %></td>
 
@@ -42,6 +43,6 @@
 
 <br>
 
-<%= link_to raw("New Notification"), "/notifications", class: "btn-new" %>
+<%= link_to raw("New Notification"), "/notifications/new", class: "btn-new" %>
 </div>
 </div>
