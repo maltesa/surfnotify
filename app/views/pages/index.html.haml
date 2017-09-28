@@ -1,3 +1,62 @@
-%h1
-  Hallo
-  = current_user.email if current_user
+/ !!!
+/ %html
+/   %head
+/     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+/     %title SurfNotify
+/     %link{:href => "./css/index.css", :rel => "stylesheet", :type => "text/css"}/
+/     %link{:href => "./css/landing-page.css", :rel => "stylesheet", :type => "text/css"}/
+/     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+/     %link{:href => "./css/simple-grid.css", :rel => "stylesheet", :type => "text/css"}/
+/   %body
+/     .intro-header
+/       .container
+/         .logorowlp
+/           %a{:href => "./index.html"}= image_tag("logo-sn.png", class: "logo", alt: "surf notify logo")
+/           %a{:href => "./index.html"}
+/             %h1.strong-name-lp
+/               SURF
+/               %span.light-name-lp NOTIFY
+/         .row
+/           .col-12
+/             .intro-message
+/               %h3
+/                 %font{:color => "white"}
+/                   Never miss when your
+/                   %br/
+/                   favorite spots are working.
+/             = link_to raw("<i class=\"fa fa-feed fa-fw\"></i>Add Notification"), "/notifications", class: "btn-leadlp"
+/         / /.container
+/     / /.intro-header
+/     %br/
+/     / Page Content
+/     .container
+/       .row.lp
+/         %h2 Choose Metrics, Get Alerts
+/         .col-6 Get alerts for all the spots you are interested in, directly on your phone and never miss a good session. Set a combination of the metrics that make your spot work. Choose bewtween Swell, Swelldirection, Wind, Winddirection and more. As soon as all your criterias are met, we sent out an alert for your spot to your phone or email adress
+/         .col-6.right= image_tag("alert.png", class: "img-responsive", alt: "surf notify alert")
+/       .row.lp
+/         %h2 Set rule combinations
+/         .col-6= image_tag("metrics.png", class: "img-responsive", alt: "surf notify alert")
+/         .col-6.right Choose from multiple rulesets. Want to be alerted on small swells only with offshore winds? But also an big swells where the wind is onshore? You can now do this all within one spot notification. We have all conditions covered for you.
+/     / /.container
+/     .content-section-a
+/       .row
+/         %h2.section-title
+/           Set up your notifications now and never again miss
+/           = succeed "when" do
+/             %br/
+/         %br/
+/         .row
+/           %center
+/             = link_to raw("<i class=\"fa fa-feed fa-fw\"></i>ADD NOTIFICATION"), "/notifications", class: "btn-leadlow"
+/         / /.container
+/       / /.content-section-a
+/       / /.container
+/     .footer-stripe
+/     / /.banner
+/     / Footer
+/     %footer
+/       .container
+/         .row
+/           .col-12
+/             %p.copyright.text-muted.small 2017 SurfNotify. All Rights Reserved

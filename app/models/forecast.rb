@@ -9,8 +9,7 @@ class Forecast < ApplicationRecord
   end
 
   def forecast
-    units = read_attribute(:forecast)
-    units.map do |unit|
+    @forecast ||= read_attribute(:forecast).map do |unit|
       unit['time'] = DateTime.parse unit['time']
       unit.with_indifferent_access
     end

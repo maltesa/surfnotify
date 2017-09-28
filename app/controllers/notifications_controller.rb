@@ -1,10 +1,11 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @notifications = Notification.where(user: current_user)
   end
 
   # GET /notifications/1
@@ -24,7 +25,7 @@ class NotificationsController < ApplicationController
   # POST /notifications
   # POST /notifications.json
   def create
-    @notification = Notification.new(notification_params)
+    @notification = Notification.new notification_params
     @notification.user = current_user
 
     respond_to do |format|
@@ -66,7 +67,8 @@ class NotificationsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_notification
-    @notification = Notification.find(params[:id])
+    @notification = Notification.find_by(id: params[:id], user: current_user)
+    redirect_to notifications_path if @notification.nil?
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

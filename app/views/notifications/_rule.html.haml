@@ -1,5 +1,4 @@
 .rule
-  = rule
   = label :name, rule[:name]
   - if rule[:type] == :range_slider
     = hidden_field_tag rule[:key], rule[:value], class: 'range-slider rule-value', id: rule[:key],

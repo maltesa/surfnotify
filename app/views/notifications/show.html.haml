@@ -10,16 +10,14 @@
   = @notification.spot
 %p
   %strong Rules:
-  = @notification.rules
-%p
-  %strong User:
-  = @notification.user
-%p
-  - @matching_forecasts.each do |unit|
+  = @notification.activated_rules
+
+- @matching_forecasts.each do |unit|
+  %p
     = "Match on #{l unit[:time], format: :long}"
     %br
     - @notification.activated_rules_with_params.each do |rule|
-      = "#{rule[:name]}: #{unit[rule[:key]]}"
+      = "#{rule[:name]}: is #{unit[rule[:key]]} should be #{rule[:value]}"
       %br
     %hr
 = link_to 'Edit', edit_notification_path(@notification)
