@@ -1,5 +1,6 @@
 # Model for user defined notifications
 class Notification < ApplicationRecord
+  before_update :apply_rules
   before_validation :create_missing_forecast
   belongs_to :user
   belongs_to :forecast, primary_key: :spot, foreign_key: :spot
@@ -15,6 +16,18 @@ class Notification < ApplicationRecord
     params_with_rules.select { |v| v[:activated] == true }
   end
 
+  def apply_rules
+    # apply filter to new forecast
+    old_filtered_forecast = filtered_forecast_cache
+    write_attribute(:filtered_forecast_cache, forecast.filter_by(rules))
+    # create diff to old cache
+    diff = Helpers.hash_diff(old_filtered_forecast, filtered_forecast_cache)
+    # notify user if changes occured
+    user.notify(diff) if diff.present?
+    # return filtered forecast
+    filtered_forecast_cache
+  end
+
   # relate forecast corresponding to spot
   def create_missing_forecast
     forecast = Forecast.find_by(spot: spot, provider: provider)
@@ -22,13 +35,24 @@ class Notification < ApplicationRecord
     Forecast.create(provider: provider, spot: spot)
   end
 
+  def filtered_forecast_cache
+    @filtered_forecast_cache ||= read_attribute(:filtered_forecast_cache).map do |unit|
+      unit['time'] = DateTime.parse unit['time']
+      unit.with_indifferent_access
+    end
+  end
+
   def json_is_valid
-    # TODO, check whether rule fits selected provider
+    # TODO: check whether rule fits selected provider
     errors.add(:rules, 'The given rules are invalid!') if rules[:error]
   end
 
   def matching_forecasts
-    forecast.filter_by(rules)
+    # return cache if forecast data is older then this
+    return filtered_forecast_cache if forecast.updated_at < updated_at
+    # update cache and save
+    apply_rules
+    save
   end
 
   def params_with_rules
