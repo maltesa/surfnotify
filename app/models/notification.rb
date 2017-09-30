@@ -18,11 +18,10 @@ class Notification < ApplicationRecord
 
   def apply_rules
     # apply rules to new forecast
-    old_filtered_forecast = filtered_forecast_cache
-    write_attribute(:filtered_forecast_cache, forecast.filter_by(rules))
+    old_filtered_forecast = filtered_forecast_cache.dup
+    self.filtered_forecast_cache = forecast.filter_by(rules)
     # create diff to old cache
     diff = Helpers.forecast_diff(old: old_filtered_forecast, new: filtered_forecast_cache)
-    byebug
     # notify user if changes occured
     user.notify(diff) if diff.present?
     # return filtered forecast
@@ -37,8 +36,8 @@ class Notification < ApplicationRecord
   end
 
   def filtered_forecast_cache
-    @filtered_forecast_cache ||= read_attribute(:filtered_forecast_cache).map do |unit|
-      unit['time'] = DateTime.parse unit['time']
+    read_attribute(:filtered_forecast_cache).map do |unit|
+      unit['time'] = DateTime.parse unit['time'] if unit['time'].is_a? String
       unit.with_indifferent_access
     end
   end

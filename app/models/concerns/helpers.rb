@@ -5,8 +5,11 @@ module Helpers
     new.reduce([]) do |diff, unit_new|
       unit_old = old.find { |u| u[:time] == unit_new[:time] }
       if unit_old.present?
-        unit_diff = hash_diff(unit_old, unit_new)
-        diff << unit_diff.tap { |u| u[:new] = false } if unit_diff.present?
+        if (unit_diff = hash_diff(unit_old, unit_new)).present?
+          diff << unit_diff.tap { |u| u[:new] = false }
+        else
+          diff
+        end
       else
         diff << unit_new.tap { |u| u[:new] = true }
       end
