@@ -17,11 +17,12 @@ class Notification < ApplicationRecord
   end
 
   def apply_rules
-    # apply filter to new forecast
+    # apply rules to new forecast
     old_filtered_forecast = filtered_forecast_cache
     write_attribute(:filtered_forecast_cache, forecast.filter_by(rules))
     # create diff to old cache
-    diff = Helpers.hash_diff(old_filtered_forecast, filtered_forecast_cache)
+    diff = Helpers.forecast_diff(old: old_filtered_forecast, new: filtered_forecast_cache)
+    byebug
     # notify user if changes occured
     user.notify(diff) if diff.present?
     # return filtered forecast
