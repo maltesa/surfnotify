@@ -1,6 +1,6 @@
 # Model for user defined notifications
 class Notification < ApplicationRecord
-  before_update :apply_rules
+  before_update :apply_rules_and_notify
   before_validation :create_missing_forecast
   belongs_to :user
   belongs_to :forecast, primary_key: :spot, foreign_key: :spot
@@ -16,8 +16,8 @@ class Notification < ApplicationRecord
     params_with_rules.select { |v| v[:activated] == true }
   end
 
-  def apply_rules
-    # apply rules to new forecast
+  # apply rules to new forecast
+  def apply_rules_and_notify
     old_filtered_forecast = filtered_forecast_cache.dup
     self.filtered_forecast_cache = forecast.filter_by(rules)
     # create diff to old cache
@@ -51,7 +51,7 @@ class Notification < ApplicationRecord
     # return cache if forecast data is older then this
     return filtered_forecast_cache if forecast.updated_at < updated_at
     # update cache and save
-    apply_rules
+    apply_rules_and_notify
     save
   end
 

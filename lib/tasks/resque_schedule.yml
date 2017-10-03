@@ -1,0 +1,4 @@
+pull_forecasts:
+  every: 1h
+  queue: default
+  class: 'PullForecastsJob'
