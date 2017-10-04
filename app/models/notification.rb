@@ -22,8 +22,9 @@ class Notification < ApplicationRecord
     self.filtered_forecast_cache = forecast.filter_by(rules)
     # create diff to old cache
     diff = Helpers.forecast_diff(old: old_filtered_forecast, new: filtered_forecast_cache)
+    logger.info "DIFF: #{diff.inspect}"
     # notify user if changes occured
-    user.notify(diff) if diff.present?
+    user.notify(self, diff) if diff.present?
     # return filtered forecast
     filtered_forecast_cache
   end

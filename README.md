@@ -1,24 +1,12 @@
 # README
+## starting resque and resque scheduler
+- make sure redis is running on default port
+- start (at least) one worker:
+  - `LOGGING=1 QUEUE=* bundle exec rake resque:work`
+- start resque scheduler task:
+  - `rake resque:scheduler`
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## catching mails in development
+- mailcather is used so please `gem install mailcatcher` (do NOT add it to the GEMFILE)
+- and run `mailcatcher` afterwards
+- see mails at http://localhost:1080/

@@ -1,12 +1,5 @@
 = form_with(model: notification, local: true, id: 'notification-form') do |form|
-  - if notification.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(notification.errors.count, "error")
-        prohibited this notification from being saved:
-      %ul
-        - notification.errors.full_messages.each do |message|
-          %li= message
+  = render partial: 'shared/form_errors', locals: { inst: notification }
   .field
     = form.label :name
     = form.text_field :name, id: :'notification-name'

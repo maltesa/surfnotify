@@ -1,0 +1,8 @@
+- if inst.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(inst.errors.count, "error")
+      prohibited this from being saved:
+    %ul
+      - inst.errors.full_messages.each do |message|
+        %li= message

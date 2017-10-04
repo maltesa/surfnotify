@@ -7,6 +7,7 @@
   .navlink
     - if current_user
       %a= link_to "Notifications", notifications_path
+      %a= link_to "Profile", edit_user_path
       %a= link_to "Sign out", destroy_user_session_path, :method => :delete
     - else
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
