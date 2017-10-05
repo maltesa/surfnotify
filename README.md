@@ -1,4 +1,7 @@
 # README
+## installation with docker
+- install docker and docker-compose
+
 ## starting resque and resque scheduler
 - make sure redis is running on default port
 - start (at least) one worker:
