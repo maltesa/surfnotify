@@ -3,7 +3,10 @@
 - install docker and docker-compose
 - run `git clone user@bitbucket.org:surfnotify/dataprovider-msw.git`
 - `cd surfnotify`
-- run `docker build --build-arg CREDENTIALS="user:password@bitbucket.org" ./`
+- run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' rails`
+- run `docker-compose run rails rake db:create`
+- run `docker-compose run rails rake db:migrate`
+- run `docker-compose up`
 
 ## starting resque and resque scheduler
 - make sure redis is running on default port
