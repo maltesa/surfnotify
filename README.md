@@ -1,6 +1,9 @@
 # README
 ## installation with docker
 - install docker and docker-compose
+- run `git clone user@bitbucket.org:surfnotify/dataprovider-msw.git`
+- `cd surfnotify`
+- run `docker build --build-arg CREDENTIALS="user:password@bitbucket.org" ./`
 
 ## starting resque and resque scheduler
 - make sure redis is running on default port

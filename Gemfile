@@ -38,7 +38,7 @@ gem 'jquery-rails'
 gem 'selectize-rails'
 
 # Providers
-gem 'msw', git: 'git@bitbucket.org:surfnotify/dataprovider-msw.git', branch: 'master'
+gem 'msw', git: 'https://bitbucket.org/surfnotify/dataprovider-msw.git', branch: 'master'
 
 # Scheduling and Async Tasks
 gem 'resque'
