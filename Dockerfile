@@ -1,30 +1,31 @@
-FROM ruby:2.4-alpine
+FROM ruby:2.4-jessie
 
-RUN apk add --update --no-cache \
-      build-base \
-      nodejs \
-      tzdata \
-      libxml2-dev \
-      libxslt-dev \
-      postgresql-dev \
-      git
+# install packages
+RUN apt-get update -qq && \
+    apt-get install -y build-essential libpq-dev libpq-dev git apt-transport-https
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get update && apt-get install nodejs yarn
 RUN bundle config build.nokogiri --use-system-libraries
 
+# setup directory
 RUN mkdir /usr/src/surfnotify
 WORKDIR /usr/src/surfnotify
 
+# copy stuff
 COPY bundle_installer.sh /docker/
 RUN chmod +x /docker/bundle_installer.sh
 COPY Gemfile Gemfile.lock ./
 
+# run bundler
 # declare build parameters
 ARG USER
 ARG PASS
-# parameter is passed to the script as an environment variable.
 RUN USER="$USER" PASS="$PASS" /docker/bundle_installer.sh
 
-COPY . ./usr/src/surfnotify
+# copy project
+COPY . .
+RUN chmod a+x start_app.sh
 
 LABEL maintainer="Malte Hecht <malte.fisch@gmail.com>"
-
-CMD puma -C config/puma.rb

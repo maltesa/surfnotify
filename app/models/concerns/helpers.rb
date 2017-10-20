@@ -17,10 +17,10 @@ module Helpers
   end
 
   def self.hash_diff(a, b)
-    (a.keys | b.keys).each_with_object({}) do |diff, k|
+    (a.keys | b.keys).each_with_object({}) do |k, diff|
       if a[k] != b[k]
         diff[k] = if a[k].is_a?(Hash) && b[k].is_a?(Hash)
-                    a[k].deep_diff(b[k])
+                    hash_diff(a[k], b[k])
                   else
                     [a[k], b[k]]
                   end
