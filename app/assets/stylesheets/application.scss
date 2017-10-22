@@ -1,0 +1,20 @@
+@import 'bootstrap';
+@import 'font-awesome';
+@import 'selectize';
+@import 'selectize.default';
+
+main.container {
+  margin-top: 20px;
+}
+
+.navbar-brand > img {
+  height: 30px;
+}
+
+label.required:after {
+  content:" *";
+}
+
+.field_with_errors > input {
+  @extend .is-invalid;
+}

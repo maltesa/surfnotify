@@ -1,14 +1,14 @@
 # README
 ## installation with docker
+*Runs Application in Production Mode*
 - install docker and docker-compose
 - run `git clone user@bitbucket.org:surfnotify/dataprovider-msw.git`
 - `cd surfnotify`
 - run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' rails`
-- run `docker-compose run rails rake db:create`
-- run `docker-compose run rails rake db:migrate`
 - run `docker-compose up`
 
 ## starting resque and resque scheduler
+*in production it should be started by docker-compose*
 - make sure redis is running on default port
 - start (at least) one worker:
   - `LOGGING=1 QUEUE=* bundle exec rake resque:work`

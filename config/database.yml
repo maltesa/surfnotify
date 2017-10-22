@@ -1,19 +1,23 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
 
 development:
   <<: *default
   database: surfnotify_development
+  host: localhost
+  username: postgres
 
 test:
   <<: *default
   database: surfnotify_test
+  host: localhost
+  username: postgres
 
 production:
   <<: *default
   database: surfnotify_production
+  host: db
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>

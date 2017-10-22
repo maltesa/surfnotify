@@ -1,15 +1,18 @@
 !!!
-%html
+%html{lang: 'en'}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'}/
+    %meta{charset: 'utf-8'}/
+    %meta{content: 'width=device-width, initial-scale=1, shrink-to-fit=no', name: 'viewport'}/
+    %meta{content: '', name: 'description'}/
+    %meta{content: '', name: 'author'}/
     %title SurfNotify
     = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'favicon.ico'
   %body
-    %div= render 'layouts/navigation'
-    .container
+    = render 'layouts/navigation'
+    %main.container{role: 'main'}
       = render 'layouts/messages'
       = yield

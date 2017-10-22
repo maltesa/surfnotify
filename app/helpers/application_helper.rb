@@ -14,4 +14,17 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def flash2bootstrap(key)
+    case key.to_sym
+    when :error
+      'danger'
+    when :alert
+      'warning'
+    when :notice
+      'info'
+    else
+      key.to_s
+    end
+  end
 end
