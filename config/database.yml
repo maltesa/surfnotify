@@ -19,6 +19,5 @@ production:
   <<: *default
   database: surfnotify_production
   host: db
-  port: 5433
   username: <%= ENV['POSTGRES_USER'] %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
