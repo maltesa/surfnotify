@@ -18,7 +18,7 @@ module Helpers
 
   def self.hash_diff(a, b)
     (a.keys | b.keys).each_with_object({}) do |k, diff|
-      if a[k] != b[k]
+      if !a[k].eql?(b[k])
         diff[k] = if a[k].is_a?(Hash) && b[k].is_a?(Hash)
                     hash_diff(a[k], b[k])
                   else
