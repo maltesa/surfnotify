@@ -2,7 +2,7 @@
 ## installation with docker
 *Runs Application in Production Mode*
 - install docker and docker-compose
-- run `git clone user@bitbucket.org:surfnotify/dataprovider-msw.git`
+- run `git@bitbucket.org:surfnotify/surfnotify-rails.git`
 - `cd surfnotify`
 - run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' app`
 - run `docker-compose up`
