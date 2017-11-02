@@ -32,7 +32,7 @@ services:
       - 80:80
       - 443:443
     restart: unless-stopped
-    volumes: &proxy_volumes
+    volumes:
       - /var/run/docker.sock:/tmp/docker.sock
       - proxy:/etc/nginx/certs
       - proxy:/etc/nginx/vhost.d
@@ -45,7 +45,11 @@ services:
       NGINX_DOCKER_GEN_CONTAINER: proxy
       NGINX_PROXY_CONTAINER: proxy
     restart: unless-stopped
-    volumes: *proxy_volumes
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - proxy:/etc/nginx/certs
+      - proxy:/etc/nginx/vhost.d
+      - proxy:/usr/share/nginx/html
   redis:
     image: redis:4.0.2-alpine
     command: redis-server
