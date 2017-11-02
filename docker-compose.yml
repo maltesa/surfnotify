@@ -39,8 +39,7 @@ services:
     image: jrcs/letsencrypt-nginx-proxy-companion
     depends_on:
       - proxy
-    volumes:
-      <<: *proxy_volumes
+    volumes: *proxy_volumes
   redis:
     image: redis:4.0.2-alpine
     command: redis-server
