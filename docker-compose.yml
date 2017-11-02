@@ -14,6 +14,7 @@ services:
     depends_on:
       - redis
       - db
+      - nginx_tls
     environment:
       <<: *db
       RAILS_ENV: production
@@ -22,10 +23,10 @@ services:
       REDIS_URL: redis://redis:6379
       SECRET_KEY_BASE: 99c599ce75cff5b9496287f9b23b18854b4fa08e37617653d58f299b10620d726bf6fcd956b2e04adb934e11d2a41ad078302afdc865f6c1fcd4c03e778df6d3
       VIRTUAL_HOST: 'www.surfnotify.com,surfnotify.com'
-  proxy:
+      LETSENCRYPT_HOST: 'www.surfnotify.com'
+      LETSENCRYPT_EMAIL: 'info@surfnotify.com'
+  nginx:
     image: jwilder/nginx-proxy:latest
-    depends_on:
-      - app
     labels:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: 'true'
     ports:
@@ -34,22 +35,21 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
-      - proxy:/etc/nginx/certs
-      - proxy:/etc/nginx/vhost.d
-      - proxy:/usr/share/nginx/html
-  proxy_tls:
+      - nginx:/etc/nginx/certs
+      - nginx:/etc/nginx/vhost.d
+      - nginx:/usr/share/nginx/html
+  nginx_tls:
     image: jrcs/letsencrypt-nginx-proxy-companion
     depends_on:
-      - proxy
+      - nginx
     environment:
-      NGINX_DOCKER_GEN_CONTAINER: proxy
-      NGINX_PROXY_CONTAINER: proxy
+      NGINX_DOCKER_GEN_CONTAINER: nginx
+      NGINX_PROXY_CONTAINER: nginx
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - proxy:/etc/nginx/certs
-      - proxy:/etc/nginx/vhost.d
-      - proxy:/usr/share/nginx/html
+    volumes_from:
+      - nginx
   redis:
     image: redis:4.0.2-alpine
     command: redis-server
@@ -59,4 +59,4 @@ services:
 volumes:
   postgres:
   redis:
-  proxy:
+  nginx:
