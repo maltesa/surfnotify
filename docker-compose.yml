@@ -32,7 +32,7 @@ services:
     volumes:
       - nginx:/etc/nginx/vhost.d
       - nginx:/usr/share/nginx/html
-      - nginx:/var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
       - nginx:/etc/nginx/certs
   letsencrypt-nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
