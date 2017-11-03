@@ -36,6 +36,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
   letsencrypt-nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
+    depends_on: nginx-proxy
     volumes:
       - nginx:/etc/nginx/vhost.d
       - nginx:/usr/share/nginx/html
