@@ -1,6 +1,7 @@
 # README
 ## installation with docker
 *Runs Application in Production Mode*
+- (re)create dhparams.pem in ./docker/nginx/ `openssl dhparam -out ./docker/nginx/dhparam.pem 2048`
 - install docker and docker-compose
 - run `git@bitbucket.org:surfnotify/surfnotify-rails.git`
 - `cd surfnotify`
