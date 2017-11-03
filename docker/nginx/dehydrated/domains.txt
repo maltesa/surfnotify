@@ -1,1 +1,1 @@
-wiki.pointflair.com rocket.pointflair.com git.pointflair.com cloud.pointflair.com ldap.pointflair.com etherpad.pointflair.com tasks.pointflair.com
+surfnotify.com www.surfnotify.com
