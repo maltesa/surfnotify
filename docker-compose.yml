@@ -10,6 +10,7 @@ services:
       - postgres:/var/lib/postgresql/data
   app:
     build: ./docker/app
+    context: ../../
     command: sh ./start_app.sh
     depends_on:
       - redis
