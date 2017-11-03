@@ -46,10 +46,10 @@ BASEDIR=/etc/dehydrated
 #DOMAINS_TXT="${BASEDIR}/domains.txt"
 
 # Output directory for generated certificates
-CERTDIR="/etc/ssl/surfnotify.com"
+CERTDIR="/etc/ssl"
 
 # Directory for account keys and registration information
-ACCOUNTDIR="/etc/ssl/surfnotify.com/accounts"
+ACCOUNTDIR="/etc/ssl/accounts"
 
 # Output directory for challenge-tokens to be served by webserver or deployed in HOOK (default: /var/www/dehydrated)
 #WELLKNOWN="/var/www/dehydrated"
