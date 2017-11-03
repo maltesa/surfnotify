@@ -13,14 +13,14 @@ RUN bundle config build.nokogiri --use-system-libraries
 RUN mkdir /usr/src/surfnotify
 
 # copy scripts
-COPY start_app.sh /usr/src/surfnotify
+WORKDIR /usr/src/surfnotify
+COPY docker/app/start_app.sh .
 RUN chmod +x /usr/src/surfnotify/start_app.sh
-COPY bundle_installer.sh /docker/
+COPY docker/app/bundle_installer.sh /docker/
 RUN chmod +x /docker/bundle_installer.sh
 
-WORKDIR /usr/src/surfnotify
 # copy project
-COPY ../../ .
+COPY . .
 # declare build parameters
 ARG USER
 ARG PASS

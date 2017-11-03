@@ -9,8 +9,9 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
   app:
-    build: ./docker/app
-    context: ../../
+    build:
+      context: ../../
+      dockerfile: ./docker/app/Dockerfile
     command: sh ./start_app.sh
     depends_on:
       - redis
