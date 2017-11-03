@@ -22,7 +22,7 @@ services:
       REDIS_URL: redis://redis:6379
       SECRET_KEY_BASE: 99c599ce75cff5b9496287f9b23b18854b4fa08e37617653d58f299b10620d726bf6fcd956b2e04adb934e11d2a41ad078302afdc865f6c1fcd4c03e778df6d3
   nginx:
-    image: ./docker/nginx
+    build: ./docker/nginx
     depends_on:
       - app
     ports:
