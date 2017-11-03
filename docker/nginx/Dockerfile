@@ -22,8 +22,8 @@ RUN apt-get update; \
     mkdir -p /var/www/dehydrated; \
     chown www-data:www-data /var/www/dehydrated; \
     chmod 550 -R /var/www/dehydrated; \
-    mkdir -p /etc/ssl/surfnotify.com/accounts; \
-    chmod 700 -R /etc/ssl/surfnotify.com/accounts; \
+    mkdir -p /etc/ssl/surfnotify/accounts; \
+    chmod 700 -R /etc/ssl/surfnotify/accounts; \
     curl https://raw.githubusercontent.com/lukas2511/dehydrated/master/dehydrated \
          -o /usr/local/bin/dehydrated; \
     chmod 755 /usr/local/bin/dehydrated;
@@ -40,6 +40,6 @@ RUN chmod 700 -R /etc/dehydrated; \
     crontab /etc/cron.d/dehydrated-cron;
 
 VOLUME '/var/log/nginx'
-VOLUME '/etc/ssl/surfnotify.com'
+VOLUME '/etc/ssl/surfnotify'
 
 CMD cron && nginx -g 'daemon off;'
