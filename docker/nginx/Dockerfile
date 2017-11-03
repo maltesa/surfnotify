@@ -28,6 +28,9 @@ RUN apt-get update; \
          -o /usr/local/bin/dehydrated; \
     chmod 755 /usr/local/bin/dehydrated;
 
+# copy dhparam.pem
+COPY dhparam.pem /etc/ssl/
+
 # Install dehydrated for let's encrypt.
 COPY dehydrated/config /etc/dehydrated/
 COPY dehydrated/domains.txt /etc/dehydrated/
