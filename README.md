@@ -4,6 +4,7 @@
 - install docker and docker-compose
 - run `git@bitbucket.org:surfnotify/surfnotify-rails.git`
 - `cd surfnotify`
+- run `docker-compose build nginx`
 - run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' app`
 - run `docker-compose up`
 
