@@ -12,4 +12,4 @@ LOGGING=1 QUEUE=* bundle exec rake resque:work &
 # start resque schedule
 bundle exec rake resque:scheduler &
 # starting server
-bundle exec puma -e production -b unix:///tmp/my_app.sock
+bundle exec puma -e production -b unix:///tmp/surfnotify.sock
