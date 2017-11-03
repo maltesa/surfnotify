@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# remove old pids
+rm tmp/pids/*
 # DB setup
 bundle exec rails db:create
 bundle exec rails db:migrate
