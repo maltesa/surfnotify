@@ -1,5 +1,5 @@
 upstream surfnotify {
-  server unix:///var/run/surfnotify.sock;
+  server unix:///tmp/surfnotify.sock;
 }
 
 server {

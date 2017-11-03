@@ -12,4 +12,4 @@ LOGGING=1 QUEUE=* bundle exec rake resque:work &
 # start resque schedule
 bundle exec rake resque:scheduler &
 # starting server
-bundle exec rails s -b unix:///var/run/surfnotify.sock
+bundle exec rails s -b unix:///tmp/surfnotify.sock
