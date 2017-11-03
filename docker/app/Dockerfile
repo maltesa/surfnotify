@@ -11,21 +11,20 @@ RUN bundle config build.nokogiri --use-system-libraries
 
 # setup directory
 RUN mkdir /usr/src/surfnotify
-WORKDIR /usr/src/surfnotify
 
-# install gems
-COPY docker/bundle_installer.sh /docker/
-COPY Gemfile Gemfile.lock ./
+# copy scripts
+COPY start_app.sh /usr/src/surfnotify
+RUN chmod +x /usr/src/surfnotify/start_app.sh
+COPY bundle_installer.sh /docker/
 RUN chmod +x /docker/bundle_installer.sh
+
+WORKDIR /usr/src/surfnotify
+# copy project
+COPY ../../ .
 # declare build parameters
 ARG USER
 ARG PASS
+# install gems
 RUN USER="$USER" PASS="$PASS" /docker/bundle_installer.sh
-
-# copy project
-COPY . .
-RUN chmod a+x start_app.sh
-
-EXPOSE 3000
 
 LABEL maintainer="Malte Hecht <malte.fisch@gmail.com>"
