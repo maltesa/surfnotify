@@ -10,7 +10,7 @@ services:
       - postgres:/var/lib/postgresql/data
   app:
     build: ./
-    command: sh ./start_app.sh
+    # command: sh ./start_app.sh
     depends_on:
       - redis
       - db
@@ -21,8 +21,8 @@ services:
       RAILS_LOG_TO_STDOUT: 'true'
       REDIS_URL: redis://redis:6379
       SECRET_KEY_BASE: 99c599ce75cff5b9496287f9b23b18854b4fa08e37617653d58f299b10620d726bf6fcd956b2e04adb934e11d2a41ad078302afdc865f6c1fcd4c03e778df6d3
-      VIRTUAL_HOST: 'www.surfnotify.com,surfnotify.com'
-      LETSENCRYPT_HOST: 'www.surfnotify.com'
+      VIRTUAL_HOST: 'surfnotify.com,www.surfnotify.com'
+      LETSENCRYPT_HOST: 'surfnotify.com,www.surfnotify.com'
       LETSENCRYPT_EMAIL: 'info@surfnotify.com'
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -32,8 +32,8 @@ services:
     volumes:
       - nginx:/etc/nginx/vhost.d
       - nginx:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
       - nginx:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock:ro
   letsencrypt-nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
