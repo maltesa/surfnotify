@@ -18,7 +18,6 @@ RUN mkdir /usr/src/surfnotify
 # copy scripts
 COPY docker/app/bundle_installer.sh /docker/
 RUN chmod +x /docker/bundle_installer.sh
-
 WORKDIR /usr/src/surfnotify
 COPY docker/app/start_app.sh .
 RUN chmod +x ./start_app.sh
