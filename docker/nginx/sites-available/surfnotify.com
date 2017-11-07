@@ -14,6 +14,6 @@ server {
   ssl_prefer_server_ciphers on;
 
   location / {
-    proxy_pass http://94.130.99.153:3000;
+    proxy_pass http://app:3000;
   }
 }
