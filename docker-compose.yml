@@ -32,6 +32,8 @@ services:
     volumes:
       - nginxlog:/var/log/nginx
       - surfnotify_ssl:/etc/ssl/surfnotify
+    depends_on:
+      - app
   redis:
     image: redis:4.0.2-alpine
     command: redis-server
