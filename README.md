@@ -1,14 +1,25 @@
 # README
 ## installation with docker
 *Runs Application in Production Mode*
+- install docker and docker-compose
 - create volume for ssl files (its shared with mailserver): `docker volume create surfnotify_ssl`
 - (re)create dhparams.pem in ./docker/nginx/ `openssl dhparam -out ./docker/nginx/dhparam.pem 2048`
-- install docker and docker-compose
 - run `git@bitbucket.org:surfnotify/surfnotify-rails.git`
 - `cd surfnotify`
+- comment out whole file `docker/nginx/sites-available/surfnotify.com`
 - run `docker-compose build nginx`
 - run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' app`
 - run `docker-compose up`
+- run `docker exec -t -i nginx_container_name /bin/bash`
+- generate ssl certy initially:
+  - run `dehydrated --register -accept-terms`
+  - run `dehydrated --cron`
+  - run `exit`
+- run `docker-compose down`
+- comment in whole file `docker/nginx/sites-available/surfnotify.com`
+- run `docker-compose build --no-cache nginx`
+- run `docker-compose up`
+
 
 ## starting resque and resque scheduler
 *in production it should be started by docker-compose*

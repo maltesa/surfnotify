@@ -1,17 +1,17 @@
-= form_with(model: notification, local: true, id: 'notification-form') do |form|
+= form_with(model: notification, local: true, id: 'notification-form') do |f|
   = render partial: 'shared/form_errors', locals: { inst: notification }
   .field
-    = form.label :name
-    = form.text_field :name, id: :'notification-name'
+    = f.label :name
+    = f.text_field :name, id: 'notification-name', class: 'form-control'
   .field
-    = form.label :provider
-    = form.select :provider, Notification.providers.keys.to_a, id: :'notification-provider'
+    = f.label :provider
+    = f.select :provider, Notification.providers.keys.to_a, id: 'notification-provider'
   .field
-    = form.label :spot
-    = form.text_field :spot, id: :'notification-spot', class: 'autocomplete'
+    = f.label :spot
+    = f.text_field :spot, id: 'notification-spot', class: 'autocomplete'
   .field
-    = form.hidden_field :rules, id: :'notification-rules'
+    = f.hidden_field :rules, id: 'notification-rules'
     .rules
       = render partial: 'rule', collection: @notification.params_with_rules
   .actions
-    = form.submit
+    = f.submit class: 'btn btn-lg btn-outline-primary'
