@@ -1,6 +1,7 @@
 # README
 ## installation with docker
 *Runs Application in Production Mode*
+- create volume for ssl files (its shared with mailserver): `docker volume create surfnotify_ssl`
 - (re)create dhparams.pem in ./docker/nginx/ `openssl dhparam -out ./docker/nginx/dhparam.pem 2048`
 - install docker and docker-compose
 - run `git@bitbucket.org:surfnotify/surfnotify-rails.git`
