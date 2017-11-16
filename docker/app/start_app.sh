@@ -5,8 +5,6 @@ rm tmp/pids/*
 # DB setup
 bundle exec rails db:create
 bundle exec rails db:migrate
-# asset compilation
-bundle exec rails assets:precompile
 # start resque worker
 LOGGING=1 QUEUE=* bundle exec rake resque:work &
 # start resque schedule
