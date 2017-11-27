@@ -8,13 +8,6 @@ class Forecast < ApplicationRecord
     MSW::Provider.filter_by(constraints, forecast)
   end
 
-  def forecast
-    @forecast ||= read_attribute(:forecast).map do |unit|
-      unit['time'] = DateTime.parse unit['time']
-      unit.with_indifferent_access
-    end
-  end
-
   def pull
     provider = MSW::Provider.new spot
     self.forecast = provider.pull

@@ -2,18 +2,20 @@
 module Helpers
   # creates diff between old and new forecasts
   def self.forecast_diff(old:, new:)
-    new.reduce([]) do |diff, unit_new|
-      unit_old = old.find { |u| u[:time] == unit_new[:time] }
+    diff = {}
+    new.each do |timestamp, unit_new|
+      unit_old = old[timestamp]
+      # old forecast unit found?
       if unit_old.present?
+        # create and save diff between old and new unit if diff isnt empty
         if (unit_diff = hash_diff(unit_old, unit_new)).present?
-          diff << unit_diff.tap { |u| u[:new] = false }
-        else
-          diff
+          diff[timestamp] = unit_diff.tap { |u| u['new'] = false }
         end
       else
-        diff << unit_new.tap { |u| u[:new] = true }
+        diff[timestamp] = unit_new.tap { |u| u['new'] = true }
       end
     end
+    diff
   end
 
   def self.hash_diff(a, b)
