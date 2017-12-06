@@ -1,0 +1,16 @@
+%h1 Settings
+= form_for @user, url: settings_path do |f|
+  .form-group
+    = f.label :mail_enabled
+    = f.select :mail_enabled, [['Active', true], ['Inactive', false]], class: 'form-control'
+  .form-group
+    = f.label :notification_mail
+    = f.email_field :notification_mail, class: 'form-control'
+  .form-group
+    = f.label :pb_enabled
+    = f.select :pb_enabled, [['Active', true], ['Inactive', false]], class: 'form-control'
+  .form-group
+    = f.label :pb_token
+    = f.text_field :pb_token, class: 'form-control'
+  .actions
+    = f.submit 'Update', class: 'btn btn-outline-primary btn-lg'

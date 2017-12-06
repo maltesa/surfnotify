@@ -8,6 +8,13 @@ class Notification < ApplicationRecord
   validates :name, :provider, :spot, :rules, :user, :forecast, presence: true
   validate :json_is_valid
 
+  def self.params_for(provider)
+    case provider
+    when 'MagicSeaweed'
+      MSW::Provider.params.select { |p| p[:visible] }
+    end
+  end
+
   def activated_rules
     rules.select { |_, v| v[:activated] == true }
   end
@@ -18,9 +25,10 @@ class Notification < ApplicationRecord
 
   # apply rules to new forecast
   def apply_rules_and_notify
+    # keep old filtered forecast for diff
     old_filtered_forecast = filtered_forecast_cache.dup
-    self.filtered_forecast_cache = forecast.filter_by(rules)
-    # create diff to old cache
+    filtered_forecast_cache = forecast.filter_by(rules)
+    # create diff between old and new filtered forecast
     diff = Helpers.forecast_diff(old: old_filtered_forecast, new: filtered_forecast_cache)
     logger.info "DIFF: #{diff.inspect}"
     # notify user if changes occured
@@ -34,13 +42,6 @@ class Notification < ApplicationRecord
     forecast = Forecast.find_by(spot: spot, provider: provider)
     return unless forecast.blank?
     Forecast.create(provider: provider, spot: spot)
-  end
-
-  def filtered_forecast_cache
-    read_attribute(:filtered_forecast_cache).map do |unit|
-      unit['time'] = DateTime.parse unit['time'] if unit['time'].is_a? String
-      unit.with_indifferent_access
-    end
   end
 
   def json_is_valid
@@ -58,19 +59,12 @@ class Notification < ApplicationRecord
 
   def params_with_rules
     return if rules[:error]
-    self.class.params_for(provider).map do |param|
+    Notification.params_for(provider).map do |param|
       rule = rules[param[:key]] || param[:default] || {}
       param.tap do |p|
         p[:activated] = rule[:activated]
         p[:value] = rule[:value]
       end
-    end
-  end
-
-  def self.params_for(provider)
-    case provider
-    when 'MagicSeaweed'
-      MSW::Provider.params
     end
   end
 

@@ -6,7 +6,6 @@
       %th Name
       %th Spot
       %th Swellheight
-      %th Breakingsize
       %th Wavedirection
       %th Windspeed
       %th Winddirection
@@ -26,15 +25,6 @@
             %i.fa.fa-circle
           %span.metric
             (#{notification.rules[:swell_size][2]}m-#{notification.rules[:swell_size][2]}#{notification.rules[:swell_size][3]}m)
-        %td
-          - if notification.rules[:breaking_size][:activated]
-            %i.fa.fa-circle.yes
-            = notification.rules[:breaking_size][:value]
-            m
-          - else
-            %i.fa.fa-circle
-          %span.metric
-            (#{notification.rules[:breaking_size][2]}m-#{notification.rules[:breaking_size][2]}#{notification.rules[:breaking_size][3]}m)
         %td
           %i.fa.fa-circle.no
           = notification.rules[:swell_dir][:value]

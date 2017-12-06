@@ -23,16 +23,18 @@ services:
       RAILS_LOG_TO_STDOUT: 'true'
       REDIS_URL: redis://redis:6379
       SECRET_KEY_BASE: 99c599ce75cff5b9496287f9b23b18854b4fa08e37617653d58f299b10620d726bf6fcd956b2e04adb934e11d2a41ad078302afdc865f6c1fcd4c03e778df6d3
+      MAILER_ADDRESS: info@surfnotify.com
+      MAILER_PW: Px9a4D9ca42q
   nginx:
     build: ./docker/nginx
-    depends_on:
-      - app
     ports:
       - 80:80
       - 443:443
     volumes:
       - nginxlog:/var/log/nginx
       - surfnotify_ssl:/etc/ssl/surfnotify
+    depends_on:
+      - app
   redis:
     image: redis:4.0.2-alpine
     command: redis-server
@@ -40,7 +42,8 @@ services:
       - redis:/data
 
 volumes:
+  nginxlog:
   postgres:
   redis:
-  nginxlog:
   surfnotify_ssl:
+    external: true

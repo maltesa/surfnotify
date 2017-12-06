@@ -10,8 +10,6 @@ class User < ApplicationRecord
 
   def notify(notification, diff)
     return unless diff.present?
-    # TODO: more elegant solution to make diff serializable
-    diff.each { |e| e[:time] = e[:time].to_s }
     NotificationMailer.notification(notification, diff, self).deliver_later if mail_enabled
     # TODO: send PB notification if pb_enabled
   end

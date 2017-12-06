@@ -1,1 +1,1 @@
-surfnotify.com www.surfnotify.com
+surfnotify.com www.surfnotify.com mail.surfnotify.com imap.surfnotify.com smtp.surfnotify.com

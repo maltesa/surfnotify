@@ -12,12 +12,12 @@
   %strong Rules:
   = @notification.activated_rules
 
-- @matching_forecasts.each do |unit|
+- @matching_forecasts.each do |timestamp, unit|
   %p
-    = "Match on #{l unit[:time], format: :long}"
+    = "Match on #{l DateTime.strptime(timestamp, '%s'), format: :long}"
     %br
     - @notification.activated_rules_with_params.each do |rule|
-      = "#{rule[:name]}: is #{unit[rule[:key]]} should be #{rule[:value]}"
+      = "#{rule[:name]}: is #{unit[rule[:key].to_s]} should be #{rule[:value]}"
       %br
     %hr
 = link_to 'Edit', edit_notification_path(@notification)

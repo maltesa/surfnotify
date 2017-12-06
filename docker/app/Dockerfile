@@ -30,4 +30,7 @@ ARG PASS
 # install gems
 RUN USER="$USER" PASS="$PASS" /docker/bundle_installer.sh
 
+# precompile assets
+RUN bundle exec rails assets:precompile
+
 LABEL maintainer="Malte Hecht <malte.fisch@gmail.com>"
