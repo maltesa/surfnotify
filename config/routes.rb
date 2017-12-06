@@ -1,13 +1,13 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
+  get 'pages/terms'
   resources :notifications
   root to: 'pages#index'
   get 'provider/msw/find/:query' => 'provider#msw_search_spots', as: :msw_autocomplete
 
   mount Resque::Server.new, :at => '/resque'
-
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions' 
   }
 end
