@@ -1,7 +1,7 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
-  resources :notifications
+  resources :notifications, except: [:show]
   root to: 'pages#index'
   get 'provider/msw/find/:query' => 'provider#msw_search_spots', as: :msw_autocomplete
   get 'settings' => 'settings#edit', as: :settings

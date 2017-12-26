@@ -1,52 +1,35 @@
+= link_to 'Create Notification', new_notification_path, class: 'btn btn-outline-primary btn-lg pull-right'
 %h1 Your Notifications
-%table.table.table-striped
-  %thead
-    %tr
-      %th Alert
-      %th Name
-      %th Spot
-      %th Swellheight
-      %th Wavedirection
-      %th Windspeed
-      %th Winddirection
-      %th
-  %tbody
-    - @notifications.each do |notification|
-      %tr
-        %td.possiblealert TOMORROW
-        %td.spot= notification.name
-        %td.spot= link_to 'Forecast', notification.spot, class: 'btn btn-outline-info'
-        %td
-          - if notification.rules[:swell_size][:activated]
-            %i.fa.fa-circle.yes
-            = notification.rules[:swell_size][:value]
-            m
-          - else
+%hr
+.card-columns
+  - @notifications.each do |notification|
+    - matching_fc = notification.matching_forecasts
+    - next_match = matching_fc.first
+    .card{ class: matching_fc.any? ? 'border-success' : '' }
+      .card-header{ class: matching_fc.any? ? 'text-success' : '' }
+        .row
+          .col-sm-10
             %i.fa.fa-circle
-          %span.metric
-            (#{notification.rules[:swell_size][2]}m-#{notification.rules[:swell_size][2]}#{notification.rules[:swell_size][3]}m)
-        %td
-          %i.fa.fa-circle.no
-          = notification.rules[:swell_dir][:value]
-          %span.metric
-            (#{notification.rules[:swell_dir][0]}-#{notification.rules[:swell_dir][2...5]})
-        %td
-          %i.fa.fa-circle.yes
-          = notification.rules[:wind_speed][:value]
-          %span.metric
-            (#{notification.rules[:wind_speed][0]}-#{notification.rules[:wind_speed][2...5]}kmh)
-        %td
-          %i.fa.fa-circle.yes
-          = notification.rules[:wind_dir][:value]
-          %span.metric
-            (#{notification.rules[:wind_dir][0]}-#{notification.rules[:wind_dir][2...5]})
-        %td.actions
-          .btn-group
-            = link_to notification_path(notification), class: 'btn btn-sm btn-outline-primary' do
-              %i.fa.fa-eye
-            = link_to edit_notification_path(notification), class: 'btn btn-sm btn-outline-info' do
+            = notification.name
+          .col-sm-2
+            = link_to edit_notification_path(notification), class: 'pull-right' do
               %i.fa.fa-pencil
-            = link_to notification, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' do
-              %i.fa.fa-trash
-%br/
-= link_to 'New Notification', new_notification_path, class: 'btn btn-outline-primary btn-lg'
+      .card-body
+        - notification.activated_rules_with_params.each do |rule|
+          %span.strong
+            = "#{rule[:name]}: "
+          - if next_match.present?
+            - value = next_match.second[rule[:key].to_s]
+            = value.is_a?(Array) ? value.join(', ') : value
+          - else
+            %i.fa.fa-frown-o
+          %br
+      .card-footer
+        %small
+          = link_to 'forecast', notification.spot, class: 'pull-right'
+          - if next_match.present?
+            %strong Next match:
+            = l DateTime.strptime(next_match[0], '%s')
+          - else
+            No match
+    %br

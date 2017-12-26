@@ -1,10 +1,16 @@
 # Model for user defined notifications
 class Notification < ApplicationRecord
-  before_update :apply_rules_and_notify
-  before_validation :create_missing_forecast
-  belongs_to :user
-  belongs_to :forecast, primary_key: :spot, foreign_key: :spot
   enum provider: ['MagicSeaweed']
+  belongs_to :forecast, primary_key: :spot, foreign_key: :spot
+  belongs_to :user
+
+  # make sure forecast exists before rules are applied to it
+  # lifecycle: before_validation -> ... -> before_save -> ...
+  # pull is automatically called for a forecast on creation
+  before_validation :create_missing_forecast
+  before_save :apply_rules_and_notify
+
+  # validations
   validates :name, :provider, :spot, :rules, :user, :forecast, presence: true
   validate :json_is_valid
 
@@ -23,24 +29,21 @@ class Notification < ApplicationRecord
     params_with_rules.select { |v| v[:activated] == true }
   end
 
-  # apply rules to new forecast
+  # apply rules to new forecast and notify user about changes
   def apply_rules_and_notify
-    # keep old filtered forecast for diff
+    # copy old filtered forecast for diff
     old_filtered_forecast = filtered_forecast_cache.dup
-    filtered_forecast_cache = forecast.filter_by(rules)
+    self.filtered_forecast_cache = forecast.filter_by(rules)
     # create diff between old and new filtered forecast
     diff = Helpers.forecast_diff(old: old_filtered_forecast, new: filtered_forecast_cache)
-    logger.info "DIFF: #{diff.inspect}"
     # notify user if changes occured
     user.notify(self, diff) if diff.present?
-    # return filtered forecast
-    filtered_forecast_cache
   end
 
-  # relate forecast corresponding to spot
+  # create if forecast for spot in notification is not existing
   def create_missing_forecast
     forecast = Forecast.find_by(spot: spot, provider: provider)
-    return unless forecast.blank?
+    return forecast unless forecast.blank?
     Forecast.create(provider: provider, spot: spot)
   end
 
@@ -50,11 +53,10 @@ class Notification < ApplicationRecord
   end
 
   def matching_forecasts
-    # return cache if forecast data is older then this
-    return filtered_forecast_cache if forecast.updated_at < updated_at
-    # update cache and save
-    apply_rules_and_notify
-    save
+    # update cache if forecast data is newer then this
+    apply_rules_and_notify if forecast.updated_at > updated_at
+    # return filtered forecasts
+    filtered_forecast_cache || []
   end
 
   def params_with_rules

@@ -8,12 +8,6 @@ class NotificationsController < ApplicationController
     @notifications = Notification.where(user: current_user)
   end
 
-  # GET /notifications/1
-  # GET /notifications/1.json
-  def show
-    @matching_forecasts = @notification.matching_forecasts
-  end
-
   # GET /notifications/new
   def new
     @notification = Notification.new
@@ -30,7 +24,7 @@ class NotificationsController < ApplicationController
 
     respond_to do |format|
       if @notification.save
-        format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
+        format.html { redirect_to notifications_path, notice: 'Notification was successfully created.' }
         format.json { render :show, status: :created, location: @notification }
       else
         format.html { render :new }
@@ -44,7 +38,7 @@ class NotificationsController < ApplicationController
   def update
     respond_to do |format|
       if @notification.update(notification_params)
-        format.html { redirect_to @notification, notice: 'Notification was successfully updated.' }
+        format.html { redirect_to notifications_path, notice: 'Notification was successfully updated.' }
         format.json { render :show, status: :ok, location: @notification }
       else
         format.html { render :edit }
@@ -58,7 +52,7 @@ class NotificationsController < ApplicationController
   def destroy
     @notification.destroy
     respond_to do |format|
-      format.html { redirect_to notifications_url, notice: 'Notification was successfully destroyed.' }
+      format.html { redirect_to notifications_path, notice: 'Notification was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
