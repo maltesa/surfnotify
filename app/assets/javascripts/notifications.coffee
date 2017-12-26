@@ -15,20 +15,6 @@ document.addEventListener 'turbolinks:load', ->
       showLabels: true,
       isRange : true
 
-  $('.matching-forecasts').on 'show.bs.collapse', ->
-    id = $(this).attr('id')
-    btn = $('button[data-target="#' + id + '"]')
-    icon = btn.children('i').first()
-    icon.removeClass('fa-chevron-right')
-    icon.addClass('fa-chevron-down')
-
-  $('.matching-forecasts').on 'hidden.bs.collapse', ->
-    id = $(this).attr('id')
-    btn = $('button[data-target="#' + id + '"]')
-    icon = btn.children('i').first()
-    icon.removeClass('fa-chevron-down')
-    icon.addClass('fa-chevron-right')
-
 @rules2JSON = ->
   obj = {}
   $('.rule').each ->

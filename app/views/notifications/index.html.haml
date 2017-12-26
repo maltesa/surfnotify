@@ -10,7 +10,7 @@
         .row
           .col-sm-10
             %i.fa.fa-circle
-            = notification.name
+            = notification.forecast.spot_name
           .col-sm-2
             = link_to edit_notification_path(notification), class: 'pull-right' do
               %i.fa.fa-pencil
@@ -26,7 +26,7 @@
           %br
       .card-footer
         %small
-          = link_to 'forecast', notification.spot, class: 'pull-right'
+          = link_to 'show forecast', notification.spot, class: 'pull-right'
           - if next_match.present?
             %strong Next match:
             = l DateTime.strptime(next_match[0], '%s')

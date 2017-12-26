@@ -1,14 +1,13 @@
 = form_with(model: notification, local: true, id: 'notification-form') do |f|
   = render partial: 'shared/form_errors', locals: { inst: notification }
-  .field
-    = f.label :name
-    = f.text_field :name, id: 'notification-name', class: 'form-control'
-  .field
-    = f.label :provider
-    = f.select :provider, Notification.providers.keys.to_a, id: 'notification-provider'
-  .field
-    = f.label :spot
-    = f.text_field :spot, id: 'notification-spot', class: 'autocomplete'
+  .row
+    .field.col-md-3
+      = f.label :provider
+      = f.select :provider, Notification.providers.keys.to_a, id: 'notification-provider'
+    .field.col-md-9
+      = f.label :spot
+      = f.select :spot, [[@notification.forecast.try(:spot_name), @notification.spot]], {}, id: 'notification-spot', class: 'spot-autocomplete'
+      = f.hidden_field :spot_name, id: 'spot-name'
   .field
     = f.hidden_field :rules, id: 'notification-rules'
     .rules

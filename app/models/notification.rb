@@ -1,5 +1,6 @@
 # Model for user defined notifications
 class Notification < ApplicationRecord
+  attr_accessor :spot_name
   enum provider: ['MagicSeaweed']
   belongs_to :forecast, primary_key: :spot, foreign_key: :spot
   belongs_to :user
@@ -11,7 +12,7 @@ class Notification < ApplicationRecord
   before_save :apply_rules_and_notify
 
   # validations
-  validates :name, :provider, :spot, :rules, :user, :forecast, presence: true
+  validates :provider, :spot, :rules, :user, :forecast, presence: true
   validate :json_is_valid
 
   def self.params_for(provider)
@@ -44,7 +45,7 @@ class Notification < ApplicationRecord
   def create_missing_forecast
     forecast = Forecast.find_by(spot: spot, provider: provider)
     return forecast unless forecast.blank?
-    Forecast.create(provider: provider, spot: spot)
+    Forecast.create(provider: provider, spot: spot, spot_name: spot_name)
   end
 
   def json_is_valid
