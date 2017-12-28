@@ -23,6 +23,6 @@ class User < ApplicationRecord
   end
 
   def set_notification_mail
-    write_attribute(:notifcation_mail, mail)
+    write_attribute(:notification_mail, mail)
   end
 end
