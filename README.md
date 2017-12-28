@@ -25,8 +25,7 @@
 - run `git pull origin master`
 - run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' app`
 - run `docker-compose down`
-- run `docker-compose up`
-
+- run `docker-compose up -d`
 
 ## starting resque and resque scheduler
 *in production it should be started by docker-compose*
