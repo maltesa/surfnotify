@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand.navbar-dark.bg-primary
+%nav.navbar.navbar-expand.navbar-dark.bg-primary{ class: Rails.env == 'development' ? 'dev-bg' : '' }
   .container
     = link_to root_path, class: 'navbar-brand' do
       = image_tag 'logo-sn.png'
@@ -26,3 +26,4 @@
             .dropdown-menu
               = link_to 'Your Account', edit_user_registration_path, class: 'dropdown-item'
               = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+}
