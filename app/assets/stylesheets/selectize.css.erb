@@ -1,0 +1,20 @@
+.selectize-control::before {
+  -moz-transition: opacity 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  content: ' ';
+  z-index: 2;
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: 34px;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 0;
+  background: url(<%= asset_path 'spinner.gif' %>);
+  background-size: 16px 16px;
+  opacity: 0;
+}
+.selectize-control.loading::before {
+  opacity: 0.4;
+}

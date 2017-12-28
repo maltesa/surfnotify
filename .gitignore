@@ -15,7 +15,7 @@
 
 /node_modules
 /yarn-error.log
-/app/assets/*
+/public/assets/*
 /config/database.yml
 
 .byebug_history
