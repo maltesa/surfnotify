@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :notifications
   validates :notification_mail, presence: true, if: -> () { mail_enabled }
   validates :pb_token, presence: true, if: -> () { pb_enabled }
+  alias_attribute 'is_admin?', :admin
 
   def notify(spot_name, spot, diff)
     return unless diff.present?
