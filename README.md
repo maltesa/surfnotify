@@ -1,5 +1,5 @@
 # README
-## installation with docker
+## initial installation with docker
 *Runs Application in Production Mode*
 - install docker and docker-compose
 - create volume for ssl files (its shared with mailserver): `docker volume create surfnotify_ssl`
@@ -18,6 +18,13 @@
 - run `docker-compose down`
 - comment in whole file `docker/nginx/sites-available/surfnotify.com`
 - run `docker-compose build --no-cache nginx`
+- run `docker-compose up`
+
+## Updating Surfnotify app
+- `cd` to app directory (e.g. `/var/apps/surfnotify-rails`)
+- run `git pull origin master`
+- run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' app`
+- run `docker-compose down`
 - run `docker-compose up`
 
 
