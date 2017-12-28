@@ -18,10 +18,11 @@
             = link_to 'Log in', new_session_path(resource_name), class: 'nav-link'
           %li.nav-item
             = link_to 'Sign up', new_registration_path(resource_name), class: 'nav-link'
-      %ul.navbar-nav
-        %li.nav-item.dropdown
-          %a.nav-link.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown' }
-            = current_user.email
-          .dropdown-menu
-            = link_to 'Your Account', edit_user_registration_path, class: 'dropdown-item'
-            = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+      - if current_user
+        %ul.navbar-nav
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown' }
+              = current_user.email
+            .dropdown-menu
+              = link_to 'Your Account', edit_user_registration_path, class: 'dropdown-item'
+              = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item'

@@ -1,16 +1,28 @@
 # Represents a User
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  before_create :set_notification_mail
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
-         :validatable
+         :validatable, :confirmable
   has_many :notifications
   validates :notification_mail, presence: true, if: -> () { mail_enabled }
   validates :pb_token, presence: true, if: -> () { pb_enabled }
 
-  def notify(notification, diff)
+  def notify(spot_name, spot, diff)
     return unless diff.present?
-    NotificationMailer.notification(notification, diff, self).deliver_later if mail_enabled
-    # TODO: send PB notification if pb_enabled
+    message = NotificationMailer.forecast_notification(spot_name, spot, diff, self)
+
+    # notify via mail
+    message.deliver_later if mail_enabled
+
+    return unless pb_enabled
+    # notify via Pushbullet
+    client = Washbullet::Client.new(pb_token)
+    client.push_note(params: { title: message.subject, body: message.body.to_s })
+  rescue Washbullet::Unauthorized
+    Rails.logger.info "Invalid Pushbullet token for User: #{id}"
+  end
+
+  def set_notification_mail
+    write_attribute(:notifcation_mail, mail)
   end
 end
