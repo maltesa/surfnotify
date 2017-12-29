@@ -1,4 +1,5 @@
-pull_forecasts:
-  every: 1h
+PullForecastsJob:
+  every:
+    - '2h'
+    - :first_in: '2s'
   queue: default
-  class: 'PullForecastsJob'
