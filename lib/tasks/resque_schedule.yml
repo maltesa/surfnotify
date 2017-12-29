@@ -1,5 +1,5 @@
 PullForecastsJob:
   every:
     - '2h'
-    - :first_in: '2s'
+    - :first_in: '120s'
   queue: default
