@@ -11,7 +11,7 @@ class NotifyUserJob < ApplicationJob
 
     # notify via Pushbullet
     return unless user.pb_enabled
-    client = Washbullet::Client.new(pb_token)
+    client = Washbullet::Client.new(user.pb_token)
     client.push_note(params: { title: message.subject, body: message.body.to_s })
   rescue Washbullet::Unauthorized
     Rails.logger.info "Invalid Pushbullet token for User: #{id}"

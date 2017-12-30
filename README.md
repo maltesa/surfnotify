@@ -27,6 +27,10 @@
 - run `docker-compose down`
 - run `docker-compose up -d`
 
+## Updating Images
+- run `docker-compose pull`
+- run `docker-compose up`
+
 ## starting resque and resque scheduler
 *in production it should be started by docker-compose*
 - make sure redis is running on default port
