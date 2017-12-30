@@ -1,17 +1,14 @@
-# pull data for all forecasts and trigger notifications if necessary
+# enques PullForecastJobs which pull the forecast from MSW and subsequently start NotifyUserJobs
+# which notifiy Users about changes to the forecast
+# This Class is no child of ApplicationJob since application Job is not working with resque
+# Scheduler
 class PullForecastsJob
   # provider may be 'MagicSeaweed' etc.
   def self.perform(provider = nil)
     forecasts = provider.nil? ? Forecast.all : Forecast.where(provider: provider)
-    # pull each forecast and save the new data
-    forecasts.each do |forecast|
-      forecast.pull
-      forecast.save
-      # update the related notifications
-      forecast.notifications.each do |notification|
-        notification.apply_rules_and_notify
-        notification.save
-      end
+    # enque PullForecast Jobs
+    forecasts.pluck(:id).each do |f_id|
+      PullForecastJob.perform_later(f_id)
     end
   end
 end

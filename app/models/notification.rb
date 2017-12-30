@@ -7,9 +7,9 @@ class Notification < ApplicationRecord
 
   # make sure forecast exists before rules are applied to it
   # lifecycle: before_validation -> ... -> before_save -> ...
-  # pull is automatically called for a forecast on creation
+  # pull is automatically called for a forecast on creation which triggers the
+  # apply_rules_and_notify for this notification when finished
   before_validation :create_missing_forecast
-  before_save :apply_rules_and_notify
 
   # validations
   validates :provider, :spot, :rules, :user, :forecast, presence: true
@@ -30,7 +30,9 @@ class Notification < ApplicationRecord
     params_with_rules.select { |v| v[:activated] == true }
   end
 
-  # apply rules to new forecast and notify user about changes
+  # applies rules to new forecast and notify user about changes
+  # WARNING: This methods does not persist data. Make sure save is called afterwards or it is called
+  #          in a hook before save
   def apply_rules_and_notify
     # copy old filtered forecast for diff
     old_filtered_forecast = filtered_forecast_cache.dup

@@ -2,4 +2,4 @@ PullForecastsJob:
   every:
     - '2h'
     - :first_in: '120s'
-  queue: default
+  queue: data_collectors
