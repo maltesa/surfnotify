@@ -23,7 +23,12 @@
               = "#{rule[:name]}: "
             - if next_match.present?
               - value = next_match.second[rule[:key].to_s]
-              = value.is_a?(Array) ? value.join(', ') : value
+              - if value.is_a?(Array)
+                = value.join(', ')
+              - elsif value.present?
+                value
+              - else
+                %span.font-italic No data
             - else
               %i.fa.fa-frown-o
             %br
