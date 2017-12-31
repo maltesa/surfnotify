@@ -26,7 +26,7 @@
               - if value.is_a?(Array)
                 = value.join(', ')
               - elsif value.present?
-                value
+                = value
               - else
                 %span.font-italic No data
             - else
