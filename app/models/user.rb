@@ -8,8 +8,8 @@ class User < ApplicationRecord
   validates :pb_token, presence: true, if: -> () { pb_enabled }
   alias_attribute 'is_admin?', :admin
 
-  def notify(spot_name, spot, diff)
-    NotifyUserJob.perform_later(spot_name, spot, diff, self)
+  def notify(spot_name, spot, filtered_forecast, diff)
+    NotifyUserJob.perform_later(spot_name, spot, filtered_forecast, diff, self)
   end
 
   def set_notification_mail

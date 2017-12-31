@@ -1,9 +1,13 @@
 Dear User,
 
-The Forecast for '<%= @spot_name %>' matches your selected criteria on these dates:
-<%= @dates.join(', ') %>
+The Forecast for '<%= @spot_name %>' matches your selected criteria at these times:
+<%= @matching_dates.join("\n") %>
 
-If you were already notified for these dates, the forecast has changed.
+<% if @matching_dates != @diff_dates %>
+
+Compared to the last notification the forecast has changed for these times:
+<%= @diff_dates.join("\n") %>
+<% end %>
 
 Take a look at:
 <%= @spot_url %>

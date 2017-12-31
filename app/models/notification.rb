@@ -40,7 +40,7 @@ class Notification < ApplicationRecord
     # create diff between old and new filtered forecast
     diff = Helpers.forecast_diff(old: old_filtered_forecast, new: filtered_forecast_cache)
     # notify user if changes occured
-    user.notify(forecast.spot_name, spot, diff) if diff.present?
+    user.notify(forecast.spot_name, spot, filtered_forecast_cache, diff) if diff.present?
   end
 
   # create if forecast for spot in notification is not existing

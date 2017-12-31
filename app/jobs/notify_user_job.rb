@@ -2,10 +2,10 @@
 class NotifyUserJob < ApplicationJob
   queue_as :notifications
 
-  def perform(spot_name, spot, diff, user)
+  def perform(spot_name, spot, filtered_forecast, diff, user)
     return unless diff.present?
-    message = NotificationMailer.forecast_notification(spot_name, spot, diff, user)
-
+    message = NotificationMailer.forecast_notification(spot_name, spot, filtered_forecast, diff,
+                                                       user)
     # notify via mail
     message.deliver_later if user.mail_enabled
 
