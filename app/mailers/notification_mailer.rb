@@ -6,6 +6,6 @@ class NotificationMailer < ApplicationMailer
     @spot_url = spot
     @dates = diff.keys.map { |ts| l(DateTime.strptime(ts, '%s'), format: :short) }
     @user = user
-    mail(to: @user.notification_mail, subject: 'Forecast Notification')
+    mail(to: @user.notification_mail, subject: "Forecast Notification for #{spot_name}")
   end
 end
