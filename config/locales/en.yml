@@ -21,6 +21,12 @@ en:
         mail_enabled: 'Notifiy me via mail'
         pb_token: 'Pushbullet token'
         pb_enabled: 'Notifiy me via Pushbullet'
+        notify_freq: 'Notify me'
+        notify_freqs:
+          initial_match: 'Once if my parameters match somewhere'
+          every_change: 'On every forecast change which matches my parameters'
+        notify_passed_matches: 'Notify me about forecasts which no longer match'
+
   date:
     abbr_day_names:
     - Sun

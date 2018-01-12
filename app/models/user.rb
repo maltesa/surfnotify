@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
          :validatable, :confirmable
   has_many :notifications
+  enum notify_freq: [:initial_match, :every_change]
   validates :notification_mail, presence: true, if: -> () { mail_enabled }
   validates :pb_token, presence: true, if: -> () { pb_enabled }
   alias_attribute 'is_admin?', :admin

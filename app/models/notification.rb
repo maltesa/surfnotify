@@ -38,9 +38,17 @@ class Notification < ApplicationRecord
     old_filtered_forecast = filtered_forecast_cache.dup
     self.filtered_forecast_cache = forecast.filter_by(rules)
     # create diff between old and new filtered forecast
-    diff = Helpers.forecast_diff(old: old_filtered_forecast, new: filtered_forecast_cache)
-    # notify user if changes occured
-    user.notify(forecast.spot_name, spot, filtered_forecast_cache, diff) if diff.present?
+    diff = Diff.new(old: old_filtered_forecast, new: filtered_forecast_cache)
+
+    # Notify user about changes if there are any
+    passed_matches = diff.passed_matches
+    if user.notify_freq == :initial_match && diff.new_data? ||
+       user.notify_freq == :every_change && diff.present? ||
+       user.notify_passed_matches && passed_matches.present?
+      # HIER GEHTS WEITER
+      # notifications unterscheiden (nur aenderungen, neue daten, und passed_matches)
+      user.notify(forecast.spot_name, spot, filtered_forecast_cache, diff)
+    end
   end
 
   # create if forecast for spot in notification is not existing

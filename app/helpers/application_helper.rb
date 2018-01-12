@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def enum_options_for_select(model, attribute)
+    Object.const_get(model.to_s.upcase_first).send(attribute.to_s.pluralize).map do |key, val|
+      [I18n.t("activerecord.attributes.#{model}.#{attribute.to_s.pluralize}.#{key}"), val]
+    end
+  end
+
   def resource_name
     :user
   end

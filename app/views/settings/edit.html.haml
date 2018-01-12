@@ -10,6 +10,12 @@
     = f.label :pb_enabled
     = f.select :pb_enabled, [['Active', true], ['Inactive', false]], class: 'form-control'
   .form-group
+    = f.label :notify_freq
+    = f.select :notify_freq, enum_options_for_select(:user, :notify_freq), class: 'form-control'
+  .form-group
+    = f.label :notify_passed_matches
+    = f.select :notify_passed_matches, [['Yes', true], ['No', false]], class: 'form-control'
+  .form-group
     = f.label :pb_token
     = f.text_field :pb_token, class: 'form-control'
   .actions
