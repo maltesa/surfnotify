@@ -3,7 +3,10 @@ class NotifyUserJob < ApplicationJob
   queue_as :notifications
 
   def perform(user, spot_name, spot, new_matches, changed_matches, passed_matches)
-    return unless new_matches.present? || changed_matches.present? || passed_matches.present?
+    return unless new_matches.present? && user.notify_freq == :initial_match ||
+                  changed_matches.present? && user.notify_freq == :every_change ||
+                  passed_matches.present? && user.passed_matches
+
     message = NotificationMailer.forecast_notification(user, spot_name, spot, new_matches,
                                                        changed_matches, passed_matches)
     # notify via mail

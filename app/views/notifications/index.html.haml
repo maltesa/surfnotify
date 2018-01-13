@@ -13,15 +13,16 @@
             = notification.forecast.spot_name
           .col-sm-3
             .pull-right
-              = link_to edit_notification_path(notification), class: 'btn btn-sm btn-outline-primary'  do
-                %i.fa.fa-pencil
               = link_to silence_notification_path(notification), class: 'btn btn-sm btn-outline-warning'  do
                 - if notification.silent?
                   %i.fa.fa-volume-off
                 - else
                   %i.fa.fa-volume-up
-              = link_to notification_path(notification), method: :delete, data: { confirm: 'Do you really want to delete the notification?' }, class: 'btn btn-sm btn-danger' do
-                %i.fa.fa-trash
+              .btn-group.ml-1
+                = link_to edit_notification_path(notification), class: 'btn btn-sm btn-outline-primary'  do
+                  %i.fa.fa-pencil
+                = link_to notification_path(notification), method: :delete, data: { confirm: 'Do you really want to delete the notification?' }, class: 'btn btn-sm btn-danger' do
+                  %i.fa.fa-trash
       .card-body
         - if notification.forecast.forecast.none?
           %span.font-italic Waiting for forecast data ...
