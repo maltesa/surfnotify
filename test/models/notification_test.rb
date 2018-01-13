@@ -15,4 +15,15 @@ class NotificationTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test 'don notify if notification is silent' do
+    # this notification belongs to one user and the rules will match its related forecast
+    notification = notifications(:matching_notification)
+    notification.silent = true
+
+    # make sure job is executed, and mail is send
+    assert_emails 0 do
+      notification.apply_rules_and_notify
+    end
+  end
 end

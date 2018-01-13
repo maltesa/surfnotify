@@ -1,6 +1,7 @@
 # Model for user defined notifications
 class Notification < ApplicationRecord
   attr_accessor :spot_name
+  alias_attribute :silent?, :silent
   enum provider: ['MagicSeaweed']
   belongs_to :forecast, primary_key: :spot, foreign_key: :spot
   belongs_to :user
@@ -42,6 +43,8 @@ class Notification < ApplicationRecord
     # create diff between old and new filtered forecast
     diff = Diff.new(old: old_filtered_forecast, new: filtered_forecast_cache)
 
+    # dont send notifications for silenced notifications
+    return if silent
     # Notify user about changes if there are any changes (checked in notify method)
     user.notify(forecast.spot_name, spot, diff)
   end

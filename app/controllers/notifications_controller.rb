@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  before_action :set_notification, only: [:show, :edit, :update, :destroy, :toggle_silent]
   before_action :authenticate_user!
 
   # GET /notifications
@@ -53,6 +53,18 @@ class NotificationsController < ApplicationController
     @notification.destroy
     respond_to do |format|
       format.html { redirect_to notifications_path, notice: 'Notification was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def toggle_silent
+    @notification.silent = !@notification.silent
+    @notification.save
+    respond_to do |format|
+      format.html do
+        verb = @notification.silent ? 'silenced' : 'desilenced'
+        redirect_to notifications_path, notice: "Notification was successfully #{verb}."
+      end
       format.json { head :no_content }
     end
   end

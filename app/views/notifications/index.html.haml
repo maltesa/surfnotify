@@ -8,12 +8,20 @@
     .card{ class: matching_fc.any? ? 'border-success' : '' }
       .card-header{ class: matching_fc.any? ? 'text-success' : '' }
         .row
-          .col-sm-10
+          .col-sm-9
             %i.fa.fa-circle
             = notification.forecast.spot_name
-          .col-sm-2
-            = link_to edit_notification_path(notification), class: 'pull-right' do
-              %i.fa.fa-pencil
+          .col-sm-3
+            .pull-right
+              = link_to edit_notification_path(notification), class: 'btn btn-sm btn-outline-primary'  do
+                %i.fa.fa-pencil
+              = link_to silence_notification_path(notification), class: 'btn btn-sm btn-outline-warning'  do
+                - if notification.silent?
+                  %i.fa.fa-volume-off
+                - else
+                  %i.fa.fa-volume-up
+              = link_to notification_path(notification), method: :delete, confirm: 'Do you really want to delete the notification?', class: 'btn btn-sm btn-danger' do
+                %i.fa.fa-trash
       .card-body
         - if notification.forecast.forecast.none?
           %span.font-italic Waiting for forecast data ...
