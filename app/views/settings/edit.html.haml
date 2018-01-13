@@ -1,5 +1,6 @@
 %h1 Settings
 = form_for @user, url: settings_path do |f|
+  %h2 Notification Targets
   .form-group
     = f.label :mail_enabled
     = f.select :mail_enabled, [['Active', true], ['Inactive', false]], class: 'form-control'
@@ -10,13 +11,15 @@
     = f.label :pb_enabled
     = f.select :pb_enabled, [['Active', true], ['Inactive', false]], class: 'form-control'
   .form-group
+    = f.label :pb_token
+    = f.text_field :pb_token, class: 'form-control'
+  %hr
+  %h2 Notification Settings
+  .form-group
     = f.label :notify_freq
     = f.select :notify_freq, enum_options_for_select(:user, :notify_freq), class: 'form-control'
   .form-group
     = f.label :notify_passed_matches
     = f.select :notify_passed_matches, [['Yes', true], ['No', false]], class: 'form-control'
-  .form-group
-    = f.label :pb_token
-    = f.text_field :pb_token, class: 'form-control'
   .actions
     = f.submit 'Update', class: 'btn btn-outline-primary btn-lg'

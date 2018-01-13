@@ -19,6 +19,6 @@ class NotificationMailer < ApplicationMailer
     verbs << 'matches' if new_matches.present?
     verbs << 'has changed' if changed_matches.present?
     verbs << 'has lost matches' if passed_matches.present?
-    subject << verbs.join('and')
+    subject << verbs.join(' and ')
   end
 end
