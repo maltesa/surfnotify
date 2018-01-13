@@ -10,6 +10,8 @@ class Notification < ApplicationRecord
   # pull is automatically called for a forecast on creation which triggers the
   # apply_rules_and_notify for this notification when finished
   before_validation :create_missing_forecast
+  # reapply rules and notify since parameters may be modified
+  before_update :apply_rules_and_notify
 
   # validations
   validates :provider, :spot, :rules, :user, :forecast, presence: true

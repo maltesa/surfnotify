@@ -1,6 +1,7 @@
 require 'json'
 require 'test_helper'
 
+# Tests the differ class for correctness
 class DifferTest < ActiveSupport::TestCase
   def setup
     # init sample data
@@ -8,7 +9,7 @@ class DifferTest < ActiveSupport::TestCase
     @old_d = sample_data
   end
 
-  def test_only_new_data
+  test "only_new_data" do
     insert_new!(@new_d, :future)
     diff = Diff.new(new: @new_d, old: @old_d)
     assert diff.matches?
@@ -17,7 +18,7 @@ class DifferTest < ActiveSupport::TestCase
     assert_not diff.passed_matches?
   end
 
-  def test_only_changed_data
+  test "only_changed_data" do
     alter_random!(@new_d)
     diff = Diff.new(new: @new_d, old: @old_d)
     assert diff.matches?
@@ -26,7 +27,7 @@ class DifferTest < ActiveSupport::TestCase
     assert_not diff.passed_matches?
   end
 
-  def test_new_and_changed_data
+  test "new_and_changed_data" do
     insert_new!(@new_d, :future)
     alter_random!(@new_d)
     diff = Diff.new(new: @new_d, old: @old_d)
@@ -36,7 +37,7 @@ class DifferTest < ActiveSupport::TestCase
     assert_not diff.passed_matches?
   end
 
-  def test_passed_matches
+  test "passed_matches" do
     # old data contains a match which is missing in new data
     insert_new!(@old_d, :past)
     diff = Diff.new(new: @new_d, old: @old_d)
@@ -46,7 +47,7 @@ class DifferTest < ActiveSupport::TestCase
     assert_not diff.passed_matches?
   end
 
-  def test_unchanged_data
+  test "unchanged_data" do
     diff = Diff.new(new: @new_d, old: @old_d)
     assert_not diff.matches?
     assert_not diff.new_matches?
