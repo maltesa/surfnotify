@@ -20,7 +20,7 @@
                   %i.fa.fa-volume-off
                 - else
                   %i.fa.fa-volume-up
-              = link_to notification_path(notification), method: :delete, confirm: 'Do you really want to delete the notification?', class: 'btn btn-sm btn-danger' do
+              = link_to notification_path(notification), method: :delete, data: { confirm: 'Do you really want to delete the notification?' }, class: 'btn btn-sm btn-danger' do
                 %i.fa.fa-trash
       .card-body
         - if notification.forecast.forecast.none?
