@@ -1,12 +1,21 @@
 Dear User,
 
-The Forecast for '<%= @spot_name %>' matches your selected criteria at these times:
-<%= @matching_dates.join("\n") %>
+The following changes occured to the forecast for '<%= @spot_name %>' with your specified notification criteria.
 
-<% if @matching_dates != @diff_dates %>
+<% if @new_matches.present? %>
+The forecast matches your criteria the first time at these times:
+<%= @new_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(',') %>
 
+<% end %>
+<% if @changed_matches.present? %>
 Compared to the last notification the forecast has changed for these times:
-<%= @diff_dates.join("\n") %>
+<%= @changed_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(',') %>
+
+<% end %>
+<% if @passed_matches.present? %>
+It hurts us to announce it but your we have to withdraw our former notification(s) for these dates since the forecast does not match your criteria anymore:
+<%= @passed_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(',') %>
+
 <% end %>
 
 Take a look at:

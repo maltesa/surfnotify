@@ -1,16 +1,24 @@
 class NotificationMailer < ApplicationMailer
   default from: 'notification@surfnotify.com'
+  add_template_helper NotificationsHelper
 
-  def forecast_notification(spot_name, spot, filtered_forecast, diff, user)
+  def forecast_notification(user, spot_name, spot, new_matches, changed_matches, passed_matches)
+    @user = user
     @spot_name = spot_name
     @spot_url = spot
-    @matching_dates = filtered_forecast.keys.map { |ts| parse_date(ts) }
-    @diff_dates = diff.keys.map { |ts| parse_date(ts) }
-    @user = user
-    mail(to: @user.notification_mail, subject: "Forecast Notification for #{spot_name}")
+    @new_matches = new_matches
+    @changed_matches = changed_matches
+    @passed_matches = passed_matches
+    subject_str = subject(spot_name, new_matches, changed_matches, passed_matches)
+    mail(to: @user.notification_mail, subject: subject_str)
   end
 
-  def parse_date(ts)
-    l(DateTime.strptime(ts, '%s'), format: :short)
+  def subject(spot_name, new_matches, changed_matches, passed_matches)
+    subject = "Forecast for #{spot_name} "
+    verbs = []
+    verbs << 'matches' if new_matches.present?
+    verbs << 'has changed' if changed_matches.present?
+    verbs << 'has lost matches' if passed_matches.present?
+    subject << verbs.join('and')
   end
 end
