@@ -1,1 +1,24 @@
+malte:
+  email: malte.fisch@gmail.com
+  created_at: '2018-01-13T15:57:02.599Z'
+  updated_at: '2018-01-13T15:57:20.738Z'
+  notification_mail: malte.fisch@gmail.com
+  mail_enabled: true
+  pb_token:
+  pb_enabled: false
+  admin: false
+  notify_freq: initial_match
+  notify_passed_matches: true
+
+jan:
+  email: jan@gmail.com
+  created_at: '2018-01-13T15:57:02.599Z'
+  updated_at: '2018-01-13T15:57:20.738Z'
+  notification_mail: jan@gmail.com
+  mail_enabled: true
+  pb_token:
+  pb_enabled: false
+  admin: false
+  notify_freq: every_change
+  notify_passed_matches: true
 

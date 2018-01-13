@@ -1,0 +1,50 @@
+matching_notification:
+  user: malte
+  provider: MagicSeaweed
+  spot: http://www.magicseaweed.com/Lagide-Surf-Report/195/
+  rules:
+    tide:
+      value: all tides
+      activated: false
+    wind_dir:
+      value: '0,0'
+      activated: false
+    swell_dir:
+      value: '0,0'
+      activated: false
+    swell_size:
+      value: '1,13'
+      activated: true
+    wind_speed:
+      value: '0,0'
+      activated: false
+    probability:
+      value: '0,0'
+      activated: false
+    swell_period:
+      value: '18,30'
+      activated: true
+    weather_temp:
+      value: "-20,-20"
+      activated: false
+    weather_descr:
+      value: []
+      activated: false
+  created_at: '2018-01-13T15:57:42.406Z'
+  updated_at: '2018-01-13T16:00:26.878Z'
+  filtered_forecast_cache:
+    '1516201200':
+      wind_dir: 12
+      swell_dir:
+      - 333.79
+      - 6
+      swell_size:
+      - 5.8
+      - 1.7
+      wind_speed: 44
+      probability: 95
+      swell_period:
+      - 18
+      - 6
+      weather_temp: 13
+      weather_descr: Sunny

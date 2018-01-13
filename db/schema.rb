@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112152344) do
+ActiveRecord::Schema.define(version: 20180113163359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20180112152344) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "notification_mail"
-    t.boolean "mail_enabled", default: false
+    t.boolean "mail_enabled", default: true
     t.string "pb_token"
     t.boolean "pb_enabled", default: false
     t.string "confirmation_token"
