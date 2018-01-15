@@ -2,10 +2,10 @@ class NotificationMailer < ApplicationMailer
   default from: 'notification@surfnotify.com'
   add_template_helper NotificationsHelper
 
-  def forecast_notification(user, spot_name, spot, new_matches, changed_matches, passed_matches)
+  def forecast_notification(user, spot_name, spot_url, new_matches, changed_matches, passed_matches)
     @user = user
     @spot_name = spot_name
-    @spot_url = spot
+    @spot_url = spot_url
     @new_matches = new_matches
     @changed_matches = changed_matches
     @passed_matches = passed_matches

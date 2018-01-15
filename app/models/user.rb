@@ -9,11 +9,11 @@ class User < ApplicationRecord
   validates :pb_token, presence: true, if: -> () { pb_enabled }
   alias_attribute 'is_admin?', :admin
 
-  def notify(spot_name, spot, diff)
+  def notify(spot_name, spot_url, diff)
     return if notify_freq == :initial_match && diff.new_matches? ||
               notify_freq == :every_change && diff.matches? ||
               notify_passed_matches && diff.passed_matches?
-    NotifyUserJob.perform_later(self, spot_name, spot,
+    NotifyUserJob.perform_later(self, spot_name, spot_url,
                                 diff.new_matches, diff.changed_matches, diff.passed_matches)
   end
 

@@ -46,7 +46,7 @@ class Notification < ApplicationRecord
     # dont send notifications for silenced notifications
     return if silent
     # Notify user about changes if there are any changes (checked in notify method)
-    user.notify(forecast.spot_name, spot, diff)
+    user.notify(forecast.spot_name, spot_url, diff)
   end
 
   # create if forecast for spot in notification is not existing
@@ -90,5 +90,14 @@ class Notification < ApplicationRecord
                     rescue JSON::ParserError
                       { error: true }
                     end)
+  end
+
+  # fix for breaking msw urls
+  def spot_url
+    if provider == 'MagicSeaweed' && !spot.end_with?('/')
+      "#{spot}/"
+    else
+      spot
+    end
   end
 end

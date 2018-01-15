@@ -2,19 +2,15 @@ Dear User,
 
 The following changes occured to the forecast for '<%= @spot_name %>' with your specified notification criteria.
 
-<% if @new_matches.present? %>
-The forecast matches your criteria the first time at these times:
-<%= @new_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(',') %>
-
-<% end %>
-<% if @changed_matches.present? %>
-Compared to the last notification the forecast has changed for these times:
-<%= @changed_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(',') %>
+<% if @new_matches.present? || @changed_matches.present? %>
+The forecast matches your criteria at these times (*forecast changed compared to previous notification):
+<%= @new_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(', ') %>
+<%= @changed_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join('*, ') %>
 
 <% end %>
 <% if @passed_matches.present? %>
 It hurts us to announce it but your we have to withdraw our former notification(s) for these dates since the forecast does not match your criteria anymore:
-<%= @passed_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(',') %>
+<%= @passed_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(', ') %>
 
 <% end %>
 
