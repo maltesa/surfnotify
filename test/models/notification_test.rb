@@ -8,8 +8,9 @@ class NotificationTest < ActiveSupport::TestCase
     # this notification belongs to one user and the rules will match its related forecast
     notification = notifications(:matching_notification)
 
-    # make sure job is executed, and mail is send
+    # make sure NotifyJob and MailJob are executed
     assert_performed_jobs 2 do
+      # and mail was sent
       assert_emails 1 do
         notification.apply_rules_and_notify
       end

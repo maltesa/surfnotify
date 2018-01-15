@@ -3,9 +3,11 @@ class NotifyUserJob < ApplicationJob
   queue_as :notifications
 
   def perform(user, spot_name, spot_url, new_matches, changed_matches, passed_matches)
-    return unless new_matches.present? && user.notify_freq.include?(:initial_match, :every_change) \
-                  || changed_matches.present? && user.notify_freq == :every_change \
-                  || passed_matches.present? && user.passed_matches
+    # only notify if user settings allow this
+    return unless
+      new_matches.present? && %w[initial_match every_change].include?(user.notify_freq) ||
+      changed_matches.present? && user.notify_freq == 'every_change' ||
+      passed_matches.present? && user.passed_matches
 
     message = NotificationMailer.forecast_notification(user, spot_name, spot_url, new_matches,
                                                        changed_matches, passed_matches)
