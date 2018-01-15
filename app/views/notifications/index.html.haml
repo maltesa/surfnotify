@@ -5,19 +5,18 @@
   - @notifications.each do |notification|
     - matching_fc = notification.matching_forecasts
     - next_match = matching_fc.first
-    .card{ class: matching_fc.any? ? 'border-success' : '' }
-      .card-header{ class: matching_fc.any? ? 'text-success' : '' }
+    - btn_silent = notification.silent ? 'btn-outline-success' : 'btn-outline-warning'
+    - icon_silent = notification.silent ? 'fa-volume-up' : 'fa-volume-off'
+    .card{ class: (notification.silent || matching_fc.none?) ? '' : 'border-success' }
+      .card-header{ class: (notification.silent || matching_fc.none?) ? '' : 'text-success' }
         .row
-          .col-sm-9
-            %i.fa.fa-circle
+          .col-sm-7
+            %i.fa{ class: notification.silent ? 'fa-circle-o' : 'fa-circle' }
             = notification.forecast.spot_name
-          .col-sm-3
+          .col-sm-5
             .pull-right
-              = link_to silence_notification_path(notification), class: 'btn btn-sm btn-outline-warning'  do
-                - if notification.silent?
-                  %i.fa.fa-volume-off
-                - else
-                  %i.fa.fa-volume-up
+              = link_to silence_notification_path(notification), class: "btn btn-sm #{btn_silent}"  do
+                %i.fa{ class: icon_silent }
               .btn-group.ml-1
                 = link_to edit_notification_path(notification), class: 'btn btn-sm btn-outline-primary'  do
                   %i.fa.fa-pencil

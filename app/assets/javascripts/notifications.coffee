@@ -3,18 +3,24 @@ document.addEventListener 'turbolinks:load', ->
     $('#notification-rules').val(rules2JSON())
     return true
 
+  # init sliders for rules
   $('.range-slider').each ->
     e = $(this)
-    e.jRange
-      from: e.data('from'),
-      to: e.data('to'),
-      step: 1,
-      scale: e.data('scale'),
-      format: '%s',
-      width: 600,
-      showLabels: true,
-      isRange : true
+    val = e.data('value').split(',')
 
+    noUiSlider.create this,
+      start: val,
+      connect: true,
+      tooltips: true,
+      format: { to: Math.round, from: Math.round }
+      range:
+        'min': e.data('min'),
+        'max': e.data('max')
+      pips:
+        mode: 'range',
+        values: e.data('values')
+
+# convert rules to json in order to send them to the backend
 @rules2JSON = ->
   obj = {}
   $('.rule').each ->

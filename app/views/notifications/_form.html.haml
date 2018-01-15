@@ -8,9 +8,9 @@
       = f.label :spot
       = f.select :spot, [[@notification.forecast.try(:spot_name), @notification.spot]], {}, id: 'notification-spot', class: 'spot-autocomplete'
       = f.hidden_field :spot_name, id: 'spot-name'
-  .field
+  .row.rules
     = f.hidden_field :rules, id: 'notification-rules'
-    .rules
-      = render partial: 'rule', collection: @notification.params_with_rules
+    = render partial: 'rule', collection: @notification.params_with_rules
+  %hr
   .actions
     = f.submit class: 'btn btn-lg btn-outline-primary'
