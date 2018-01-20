@@ -10,9 +10,12 @@ class User < ApplicationRecord
   alias_attribute 'is_admin?', :admin
 
   def notify(spot_name, spot_url, diff)
-    return if notify_freq == :initial_match && diff.new_matches? ||
-              notify_freq == :every_change && diff.matches? ||
-              notify_passed_matches && diff.passed_matches?
+    # only notify if user settings allow this
+    return unless
+      diff.new_matches.present? && %w[initial_match every_change].include?(notify_freq) ||
+      diff.changed_matches.present? && notify_freq == 'every_change' ||
+      diff.passed_matches.present? && notify_passed_matches
+
     NotifyUserJob.perform_later(self, spot_name, spot_url,
                                 diff.new_matches, diff.changed_matches, diff.passed_matches)
   end
