@@ -4,10 +4,11 @@ document.addEventListener 'turbolinks:load', ->
     return true
 
   # init sliders for rules
-  $('.range-slider').each ->
+  $('div.range-slider').each ->
     e = $(this)
     val = e.data('value').split(',')
 
+    # init sliders
     noUiSlider.create this,
       start: val,
       connect: true,
@@ -19,6 +20,24 @@ document.addEventListener 'turbolinks:load', ->
       pips:
         mode: 'range',
         values: e.data('values')
+
+    # save value if slider was moved
+    slider = this.noUiSlider
+    slider.on 'set', ->
+      val_s = slider.get()
+      e.next('input.rule-value').val(val_s.join(','))
+
+
+  $('.activated-check').click ->
+    activated = $(this).is(':checked')
+    card_parent = $(this).closest('.card')
+    card_body = card_parent.children('.card-body')
+    if activated
+      card_parent.addClass('border-success')
+      card_body.slideDown()
+    else
+      card_parent.removeClass('border-success')
+      card_body.slideUp()
 
 # convert rules to json in order to send them to the backend
 @rules2JSON = ->

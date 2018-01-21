@@ -1,13 +1,14 @@
 .col-sm-6.mt-3
   .card{ class: rule[:activated] ? 'border-success' : '' }
     .card-header
+      %span.fa{ class: rule[:icon] }
       = rule[:name]
       .pull-right
-        activated
-        = check_box_tag "#{rule[:key]}_activated", '1', rule[:activated], class: 'activated'
-    .card-body.rule
+        = check_box_tag "#{rule[:key]}_activated", '1', rule[:activated], class: 'activated-check'
+    .card-body.rule{ style: rule[:activated] ? '' : 'display: none' }
       - if rule[:type] == :range_slider
-        .range-slider.rule-value{ id: rule[:key], 'data-value': rule[:value], 'data-scale': rule[:values].to_json, 'data-min': rule[:values].min, 'data-max': rule[:values].max }
+        .range-slider{ id: rule[:key], 'data-value': rule[:value], 'data-scale': rule[:values].to_json, 'data-min': rule[:values].min, 'data-max': rule[:values].max }
+        = hidden_field_tag :rule_value, rule[:value], class: 'rule-value', id: rule[:key]
       - elsif rule[:type] == :select
         = select_tag rule[:key], options_for_select(rule[:values], rule[:value]), id: rule[:key],
           class: 'rule-value'
