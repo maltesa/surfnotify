@@ -79,6 +79,10 @@ class Notification < ApplicationRecord
     end
   end
 
+  def sorted_params_with_rules
+    params_with_rules.sort_by { |e| e[:activated] ? 0 : 1 }
+  end
+
   def rules
     read_attribute(:rules).with_indifferent_access
   end
