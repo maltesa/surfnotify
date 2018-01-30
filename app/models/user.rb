@@ -1,6 +1,6 @@
 # Represents a User
 class User < ApplicationRecord
-  before_create :set_notification_mail
+  before_validation :set_notification_mail, on: :create
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
          :validatable, :confirmable
   has_many :notifications
