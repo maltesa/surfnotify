@@ -27,7 +27,6 @@ document.addEventListener 'turbolinks:load', ->
       val_s = slider.get()
       e.next('input.rule-value').val(val_s.join(','))
 
-
   $('.activated-check').click ->
     activated = $(this).is(':checked')
     card_parent = $(this).closest('.card')

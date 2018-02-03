@@ -1,23 +1,20 @@
 .row
   .col
-  .col.card
-    .card-body
-      %h1.card-title Log in
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .form-group
-          = f.label :email
-          = f.email_field :email, autofocus: true, class: 'form-control'
-        .form-group
-          = f.label :password
-          = f.password_field :password, autocomplete: 'off', class: 'form-control'
-        - if devise_mapping.rememberable?
-          .form-check
-            = f.label :remember_me, class: 'form-check-label' do
-              = f.check_box :remember_me, class: 'form-check-input'
-              Remember me
-        .actions
-          = f.submit 'Log in', class: 'btn btn-outline-primary btn-lg'
-        %hr/
-        .alternatives
-          = render partial: 'devise/shared/links', locals: { link_class: 'card-link' }
-  .col
+    %h1.card-title Log in
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-group
+        = f.label :email
+        = f.email_field :email, autofocus: true, class: 'form-control'
+      .form-group
+        = f.label :password
+        = f.password_field :password, autocomplete: 'off', class: 'form-control'
+      - if devise_mapping.rememberable?
+        .form-check
+          = f.label :remember_me, class: 'form-check-label' do
+            = f.check_box :remember_me, class: 'form-check-input'
+            Remember me
+      .actions
+        = f.submit 'Log in', class: 'btn btn-outline-primary btn-lg'
+      %hr/
+      .alternatives
+        = render partial: 'devise/shared/links', locals: { link_class: 'card-link' }
