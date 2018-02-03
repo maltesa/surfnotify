@@ -8,6 +8,7 @@ bundle exec rails db:create
 bundle exec rails db:migrate
 
 # start resque workers
+bundle exec rake resque:prune_dead_workers
 COUNT=4 LOGGING=1 QUEUE=* bundle exec rake resque:workers &
 
 # start resque schedule

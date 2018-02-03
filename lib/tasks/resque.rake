@@ -11,6 +11,11 @@ namespace :resque do
     end
   end
 
+  # remove workers from redis which are missing a process
+  task prune_dead_workers: :environment do
+    Resque.workers.map(&:prune_dead_workers)
+  end
+
   task setup_schedule: :setup do
     require 'resque-scheduler'
 
