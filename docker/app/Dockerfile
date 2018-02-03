@@ -1,4 +1,4 @@
-FROM ruby:2.5-jessie
+FROM ruby:2.4-jessie
 
 LABEL name=surfnotify.com/app
 LABEL version=0.0.1
