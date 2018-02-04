@@ -7,19 +7,21 @@ document.addEventListener 'turbolinks:load', ->
   $('div.range-slider').each ->
     e = $(this)
     val = e.data('value').split(',')
+    unit = e.data('unit')
 
     # init sliders
     noUiSlider.create this,
       start: val,
       connect: true,
-      tooltips: true,
-      format: { to: Math.round, from: Math.round }
+      tooltips: [unitFormatter(unit), unitFormatter(unit)],
       range:
         'min': e.data('min'),
         'max': e.data('max')
       pips:
-        mode: 'range',
-        values: e.data('values')
+        mode: 'positions',
+        values: [0,25,50,75,100],
+        density: 2,
+        stepped: true
 
     # save value if slider was moved
     slider = this.noUiSlider
@@ -37,6 +39,12 @@ document.addEventListener 'turbolinks:load', ->
     else
       card_parent.removeClass('border-success')
       card_body.slideUp()
+
+@unitFormatter = (unit) ->
+  return {
+    to: (v) -> Math.round(v) + ' ' + unit,
+    from: (v) -> Math.round(v) + ' ' + unit
+  }
 
 # convert rules to json in order to send them to the backend
 @rules2JSON = ->
