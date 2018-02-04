@@ -1,9 +1,9 @@
 GIT
   remote: https://bitbucket.org/surfnotify/dataprovider-msw.git
-  revision: c4ea4acaef4150cfc788179a2af4e1d8fcbe457b
+  revision: c334f5b4be5e1b9d7b1d9025773c9174b40156be
   branch: master
   specs:
-    msw (0.0.7)
+    msw (0.0.8)
 
 GEM
   remote: https://rubygems.org/

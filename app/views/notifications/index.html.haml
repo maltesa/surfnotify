@@ -24,8 +24,7 @@
           %span.font-italic Waiting for forecast data ...
         - else
           - notification.activated_rules_with_params.each do |rule|
-            %span.strong
-              = "#{rule[:name]}: "
+            %strong= "#{rule[:name]}: "
             - if next_match.present?
               - value = rule[:getter].call(next_match.second[rule[:key].to_s])
               - if value.is_a?(Array)
