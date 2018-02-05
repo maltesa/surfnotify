@@ -5,7 +5,10 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.includes(:forecast).where(user: current_user)
+    @notifications = Notification.includes(:forecast)
+                                 .where(user: current_user)
+                                 .with_spot_name
+                                 .order('spot_name')
   end
 
   # GET /notifications/new

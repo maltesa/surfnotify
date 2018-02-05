@@ -18,6 +18,9 @@ class Notification < ApplicationRecord
   validates :provider, :spot, :rules, :user, :forecast, presence: true
   validate :json_is_valid
 
+  # scopes
+  scope :with_spot_name, -> { joins(:forecast).select('forecasts.spot_name as spot_name') }
+
   def self.params_for(provider)
     case provider
     when 'MagicSeaweed'

@@ -1,0 +1,16 @@
+.row
+  .col
+    %h1 Resend confirmation instructions
+    %hr/
+    = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .field
+        = f.label :email
+        %br/
+        = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control'
+        %br/
+      .actions
+        = f.submit 'resend confirmation instructions', class: 'btn btn-outline-primary btn-lg'
+      .alternatives
+        %hr/
+        = render partial: 'devise/shared/links', locals: { link_class: 'card-link' }

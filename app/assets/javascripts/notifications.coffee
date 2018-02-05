@@ -8,12 +8,13 @@ document.addEventListener 'turbolinks:load', ->
     e = $(this)
     val = e.data('value').split(',')
     unit = e.data('unit')
+    digits = e.data('digits')
 
     # init sliders
     noUiSlider.create this,
       start: val,
       connect: true,
-      tooltips: [unitFormatter(unit), unitFormatter(unit)],
+      tooltips: [unitFormatter(unit, digits), unitFormatter(unit, digits)],
       range:
         'min': e.data('min'),
         'max': e.data('max')
@@ -40,10 +41,11 @@ document.addEventListener 'turbolinks:load', ->
       card_parent.removeClass('border-success')
       card_body.slideUp()
 
-@unitFormatter = (unit) ->
+@unitFormatter = (unit, dec_places) ->
+  dec_places = 10 ** dec_places
   return {
-    to: (v) -> Math.round(v) + ' ' + unit,
-    from: (v) -> Math.round(v) + ' ' + unit
+    to: (v) -> Math.round(v * dec_places) / dec_places + unit,
+    from: (v) -> Math.round(v * dec_places) / dec_places + unit
   }
 
 # convert rules to json in order to send them to the backend

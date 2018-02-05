@@ -26,11 +26,11 @@
           - notification.activated_rules_with_params.each do |rule|
             %strong= "#{rule[:name]}: "
             - if next_match.present?
-              - value = rule[:getter].call(next_match.second.try(:[], rule[:key].to_s))
+              - value = rule[:getter].call(next_match.second)
               - if value.is_a?(Array)
-                = value.map{ |v| "#{v} #{rule[:unit]}" }.join(', ')
+                = value.map{ |v| "#{v}#{rule[:unit]}" }.join(', ')
               - elsif value.present?
-                = "#{value} #{rule[:unit]}"
+                = "#{value}#{rule[:unit]}"
               - else
                 %span.font-italic No data
             - else

@@ -1,6 +1,7 @@
 .row
   .col
-    %h1.card-title Log in
+    %h1 Log in
+    %hr/
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group
         = f.label :email
