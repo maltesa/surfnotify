@@ -24,10 +24,7 @@
 - `cd` to app directory (e.g. `/var/apps/surfnotify-rails`)
 - run `git pull origin master`
 - run `docker-compose build --build-arg USER='malte.fisch%40gmail.com' --build-arg PASS='password' app`
-Without shutting down the container first, old resque workers remain. Therefore, first shutdown and
-boot afterwards:
-- run `docker-compose down`
-- run `docker-compose up -d`
+- run `docker-compose restart`
 
 ## Updating Images
 - run `docker-compose pull`
