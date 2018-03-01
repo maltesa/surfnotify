@@ -1,3 +1,6 @@
+[![pipeline status](https://git.surfnotify.com/maltes-projekte/surfnotify/badges/master/pipeline.svg)](https://git.surfnotify.com/maltes-projekte/surfnotify/commits/master)
+[![coverage report](https://git.surfnotify.com/maltes-projekte/surfnotify/badges/master/coverage.svg)](https://git.surfnotify.com/maltes-projekte/surfnotify/commits/master)
+
 # README
 ## initial installation with docker
 *Runs Application in Production Mode*
