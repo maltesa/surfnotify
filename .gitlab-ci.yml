@@ -7,8 +7,7 @@ stages:
 - build
 
 variables:
-  CONTAINER_TEST_IMAGE: reg.surfnotify.com/$CI_PROJECT_ID:$CI_BUILD_REF_NAME_test
-  CONTAINER_IMAGE: reg.surfnotify.com/surfnotify:$CI_BUILD_REF_NAME
+  CONTAINER_IMAGE: reg.surfnotify.com/surfnotify:latest
 
 before_script:
   - docker login -u reg -p $DOCKER_REG_PW reg.surfnotify.com
@@ -17,4 +16,4 @@ build:
   stage: build
   script:
     - docker build --pull -t $CONTAINER_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
+    - docker push $CONTAINER_IMAGE
