@@ -24,5 +24,8 @@ RUN apk del git openssh && \
     rm /tmp/id_rsa && \
     rm -r ./deployment
 
+# precompile assets for production
+RUN RAILS_ENV=production bundle exec rake assets:precompile
+
 LABEL maintainer="Malte Hecht <malte.fisch@posteo.de>"
 CMD puma -C config/puma.rb
