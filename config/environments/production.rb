@@ -93,7 +93,7 @@ Rails.application.configure do
   # mail delivery
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.surfnotify.com',
+    address:              'mail.surfnotify.com',
     port:                 587,
     domain:               'surfnotify.com',
     user_name:            ENV['MAILER_ADDRESS'],

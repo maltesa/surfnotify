@@ -6,18 +6,18 @@ default: &default
 development:
   <<: *default
   database: surfnotify_development
-  host: localhost
+  host: docker
   username: postgres
 
 test:
   <<: *default
   database: surfnotify_test
-  host: localhost
+  host: docker
   username: postgres
 
 production:
   <<: *default
   database: surfnotify_production
-  host: db
+  host: postgres
   username: <%= ENV['POSTGRES_USER'] %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>

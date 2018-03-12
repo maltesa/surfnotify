@@ -1,1 +1,0 @@
-15 1 * * * /usr/local/bin/dehydrated --cron >> /var/log/nginx/dehydrated.log 2>&1

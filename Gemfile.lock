@@ -1,5 +1,5 @@
 GIT
-  remote: https://bitbucket.org/surfnotify/dataprovider-msw.git
+  remote: ssh://git@git.surfnotify.com:10022/maltes-projekte/msw-dataprovider.git
   revision: 4cf4cb61f15d8b776777ea94da190f13c1f056c2
   branch: master
   specs:

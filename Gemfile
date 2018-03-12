@@ -38,7 +38,7 @@ gem 'jquery-rails'
 gem 'selectize-rails'
 
 # Providers
-gem 'msw', git: 'https://bitbucket.org/surfnotify/dataprovider-msw.git', branch: 'master'
+gem 'msw', git: 'ssh://git@git.surfnotify.com:10022/maltes-projekte/msw-dataprovider.git', branch: 'master'
 
 # Scheduling and Async Tasks
 # Use redis v3 since resque uses connect method which is not implemented in v4
