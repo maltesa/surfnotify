@@ -11,7 +11,7 @@ variables:
   CONTAINER_IMAGE: reg.surfnotify.com/surfnotify:$CI_BUILD_REF_NAME
 
 before_script:
-  - docker login -u reg -p $DOCKER_REG_PW my-docker-hub
+  - docker login -u reg -p $DOCKER_REG_PW reg.surfnotify.com
 
 build:
   stage: build
