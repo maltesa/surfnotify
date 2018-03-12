@@ -10,6 +10,7 @@ variables:
   DOCKER_DRIVER: overlay2
   CONTAINER_IMAGE: reg.surfnotify.com/surfnotify:latest
   SECRET_KEY_BASE: 89ffc4886ed96eb949d8f6f29a1cbd3840f91371e641ad6a609b8fadd074b0d1452772f535d1e2fbe8170c0c4aa86ae7d4921a7543c3d80e86ba43697cc2eb19
+  DEVISE_SECRET_KEY: d18cf0a87e166905bc1104a9c52adfbb81a98f4af1bf9a144a29be48665968ebbf539ce60ff9b78d36c0c253b92cac4e2f872a74e56a6c6994a6fb3da6226bb3
 
 before_script:
   - docker login -u reg -p $DOCKER_REG_PW reg.surfnotify.com
