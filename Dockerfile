@@ -19,9 +19,6 @@ RUN eval `ssh-agent -s` && \
 # copy project
 COPY . .
 
-# make startscript executable
-RUN chmod +x ./startapp.sh
-
 # cleanup
 RUN apk del git openssh && \
     rm /tmp/id_rsa && \
@@ -31,4 +28,7 @@ RUN apk del git openssh && \
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 LABEL maintainer="Malte Hecht <malte.fisch@posteo.de>"
-CMD ./startapp.sh
+
+# make startscript executable
+RUN chmod +x /app/startapp.sh
+CMD ["/app/startapp.sh"]
