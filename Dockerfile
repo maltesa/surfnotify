@@ -16,8 +16,11 @@ RUN eval `ssh-agent -s` && \
     echo -e "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
     bundle install --binstubs
 
-# copy pp
+# copy project
 COPY . .
+
+# make startscript executable
+RUN chmod +x ./startapp.sh
 
 # cleanup
 RUN apk del git openssh && \
@@ -28,4 +31,4 @@ RUN apk del git openssh && \
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 LABEL maintainer="Malte Hecht <malte.fisch@posteo.de>"
-CMD COUNT=3 QUEUE=* bundle exec rake resque:workers && puma -C config/puma.rb
+CMD ./startapp.sh
