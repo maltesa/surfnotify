@@ -28,4 +28,4 @@ RUN apk del git openssh && \
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 LABEL maintainer="Malte Hecht <malte.fisch@posteo.de>"
-CMD puma -C config/puma.rb
+CMD COUNT=3 QUEUE=* bundle exec rake resque:workers && puma -C config/puma.rb
