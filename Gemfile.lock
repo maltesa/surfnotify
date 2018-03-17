@@ -1,9 +1,9 @@
 GIT
   remote: ssh://git@git.surfnotify.com:10022/maltes-projekte/msw-dataprovider.git
-  revision: 4cf4cb61f15d8b776777ea94da190f13c1f056c2
+  revision: e46ae8d7c1e11460a558126dbef0fc4b6300238f
   branch: master
   specs:
-    msw (0.0.10)
+    msw (0.0.11)
 
 GEM
   remote: https://rubygems.org/
@@ -201,6 +201,8 @@ GEM
     selenium-webdriver (3.7.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    sentry-raven (2.7.2)
+      faraday (>= 0.7.6, < 1.0)
     sinatra (2.0.0)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -271,6 +273,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selectize-rails
   selenium-webdriver
+  sentry-raven
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
