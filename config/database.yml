@@ -6,7 +6,7 @@ default: &default
 development:
   <<: *default
   database: surfnotify_development
-  host: docker
+  host: localhost
   username: postgres
 
 test:
