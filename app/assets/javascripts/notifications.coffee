@@ -30,6 +30,15 @@ document.addEventListener 'turbolinks:load', ->
       val_s = slider.get()
       e.next('input.rule-value').val(val_s.join(','))
 
+  # init toggle matches
+  $('.toggle-matches').click ->
+    e = $(this)
+    e.closest('.card').find('.additional-match').toggle()
+    e.children('.up').toggle()
+    e.children('.down').toggle()
+    return false
+
+
   $('.activated-check').click ->
     activated = $(this).is(':checked')
     card_parent = $(this).closest('.card')

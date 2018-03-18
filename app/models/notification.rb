@@ -32,7 +32,7 @@ class Notification < ApplicationRecord
     rules.select { |_, v| v[:activated] == true }
   end
 
-  def activated_rules_with_params
+  def activated_params_with_rules
     params_with_rules.select { |v| v[:activated] == true }
   end
 

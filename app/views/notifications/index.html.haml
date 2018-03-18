@@ -4,7 +4,6 @@
 .card-columns
   - @notifications.each do |notification|
     - matching_fc = notification.matching_forecasts
-    - next_match = matching_fc.first
     - btn_silent = notification.silent ? 'btn-outline-success' : 'btn-outline-warning'
     - icon_silent = notification.silent ? 'fa-volume-up' : 'fa-volume-off'
     .card{ class: (notification.silent || matching_fc.none?) ? '' : 'border-success' }
@@ -22,26 +21,40 @@
       .card-body
         - if notification.forecast.forecast.none?
           %span.font-italic Waiting for forecast data ...
+        - elsif notification.matching_forecasts.none?
+          No matches found within the next
+          = distance_of_time_in_words(DateTime.now, DateTime.strptime(notification.forecast.forecast.keys.last, '%s'))
+          %i.fa.fa-frown-o
         - else
-          - notification.activated_rules_with_params.each do |rule|
-            %strong= "#{rule[:name]}: "
-            - if next_match.present?
-              - value = rule[:getter].call(next_match.second)
-              - if value.is_a?(Array)
-                = value.map{ |v| "#{v}#{rule[:unit]}" }.join(', ')
-              - elsif value.present?
-                = "#{value}#{rule[:unit]}"
-              - else
-                %span.font-italic No data
-            - else
-              %i.fa.fa-frown-o
-            %br
+          - notification.matching_forecasts.each_with_index do |m, i|
+            .match{ class: i == 0 ? 'first-match' : 'additional-match' }
+              %strong= l DateTime.strptime(m[0], '%s')
+              %br
+              .row
+                - notification.sorted_params_with_rules.each do |rule|
+                  .col-md-4
+                    %span.badge{ class: rule[:activated] ? 'badge-success' : 'badge-secondary'}
+                      = "#{rule[:name]}: "
+                      - value = rule[:getter].call(m.second)
+                      - if value.is_a?(Array)
+                        = value.map{ |v| "#{v}#{rule[:unit]}" }.join(', ')
+                      - elsif value.present?
+                        = "#{value}#{rule[:unit]}"
+                      - else
+                        %span.font-italic No data
       .card-footer
         %small
-          = link_to 'show forecast', notification.spot, class: 'pull-right'
-          - if next_match.present?
-            %strong Next match:
-            = l DateTime.strptime(next_match[0], '%s')
+          = link_to notification.spot, class: 'pull-right' do
+            %span.fa.fa-link
+            show forecast
+          - if notification.matching_forecasts.size > 1
+            %a.toggle-matches{ href: '#' }
+              .down
+                %span.fa.fa-chevron-down
+                Show all matches
+              .up
+                %span.fa.fa-chevron-up
+                Hide all matches
           - else
             No match
     %br
