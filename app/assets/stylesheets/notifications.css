@@ -1,5 +1,10 @@
-.range-slider {
+.range-slider,
+.cardinal-direction.to {
   margin: 15px 0 30px 0;
+}
+
+.cardinal-direction.from {
+  margin: 15px 0 70px 0;
 }
 
 .additional-match {
