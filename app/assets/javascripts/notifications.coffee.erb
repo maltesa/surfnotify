@@ -39,7 +39,7 @@ document.addEventListener 'turbolinks:load', ->
     # canvas for directions
     cx = document.getElementById(e.attr('id') + '_canvas').getContext('2d')
     bg = new Image()
-    bg.src = '/assets/compass-base.png'
+    bg.src = '<%= image_path("compass-base.png") %>'
     bg.onload = ->
       cx.drawImage(bg, 0, 0, 200, 200)
       drawRange(cx, vals)
