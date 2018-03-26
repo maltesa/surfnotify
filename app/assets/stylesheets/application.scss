@@ -21,15 +21,6 @@ label.required:after {
   @extend .is-invalid;
 }
 
-.card-columns {
-  @include media-breakpoint-only(lg) {
-    column-count: 2;
-  }
-  @include media-breakpoint-only(xl) {
-    column-count: 2;
-  }
-}
-
 .dev-bg {
   background-color: #f48f42 !important;
 }

@@ -1,0 +1,42 @@
+- matching_fc = notification.matching_forecasts
+- btn_silent = notification.silent ? 'btn-outline-warning' : 'btn-outline-success'
+- icon_silent = notification.silent ? 'fa-volume-off' : 'fa-volume-up'
+.card{ class: (notification.silent || matching_fc.none?) ? '' : 'border-success' }
+  .card-header{ class: (notification.silent || matching_fc.none?) ? '' : 'text-success' }
+    %i.fa{ class: notification.silent ? 'fa-circle-o' : 'fa-circle' }
+    = notification.forecast.spot_name
+    .pull-right
+      = link_to silence_notification_path(notification), class: "btn btn-sm #{btn_silent}"  do
+        %i.fa{ class: icon_silent }
+      .btn-group.ml-1
+        = link_to edit_notification_path(notification), class: 'btn btn-sm btn-outline-primary'  do
+          %i.fa.fa-pencil
+        = link_to notification_path(notification), method: :delete, data: { confirm: 'Do you really want to delete the notification?' }, class: 'btn btn-sm btn-danger' do
+          %i.fa.fa-trash
+  .card-body
+    - if notification.forecast.forecast.none?
+      %span.font-italic Waiting for forecast data ...
+    - elsif notification.matching_forecasts.none?
+      No matches found within the next
+      = distance_of_time_in_words(DateTime.now, DateTime.strptime(notification.forecast.forecast.keys.last, '%s'))
+      %i.fa.fa-frown-o
+    - else
+      - matching_forecasts = notification.matching_forecasts
+      = render partial: 'matching_forecast', collection: [matching_forecasts.shift], locals: { notification: notification, match_type: 'first-match' }
+      = render partial: 'matching_forecast', collection: matching_forecasts, locals: { notification: notification, match_type: 'additional-match' }
+  .card-footer
+    %small
+      = link_to notification.spot, class: 'pull-right' do
+        %span.fa.fa-link
+        show forecast
+      - if notification.matching_forecasts.size > 1
+        %a.toggle-matches{ href: '#' }
+          .down
+            %span.fa.fa-chevron-down
+            Show all matches
+          .up
+            %span.fa.fa-chevron-up
+            Hide all matches
+      - else
+        No match
+%br

@@ -1,12 +1,11 @@
-%nav.navbar.navbar-expand.navbar-dark.bg-primary{ class: Rails.env == 'development' ? 'dev-bg' : '' }
+%nav.navbar.navbar-expand-md.navbar-dark.bg-primary{ class: Rails.env == 'development' ? 'dev-bg' : '' }
   .container
     = link_to root_path, class: 'navbar-brand' do
       = image_tag 'logo-sn.png'
-      %strong SURF
-      NOTIFY
-    %button.navbar-toggler{'aria-controls': 'navbarSupportedContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation', 'data-target': '#navbarSupportedContent', 'data-toggle': 'collapse', type: 'button'}
+      %strong SURF NOTIFY
+    %button.navbar-toggler{ type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbar-elements' }
       %span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse
+    .collapse.navbar-collapse#navbar-elements
       %ul.navbar-nav.mr-auto
         - if current_user
           %li.nav-item

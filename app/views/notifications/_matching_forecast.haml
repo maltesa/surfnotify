@@ -1,0 +1,17 @@
+.match{ class: match_type }
+  %strong= l DateTime.strptime(matching_forecast[0], '%s')
+  %br
+  .row
+    - notification.sorted_params_with_rules.each do |rule|
+      .col
+        %p{ class: rule[:activated] ? 'text-primary' : 'text-secondary' }
+          - value = rule[:getter].call(matching_forecast.second)
+          - if value.is_a?(Array)
+            = value.map{ |v| "#{v}#{rule[:unit]}" }.join(', ')
+          - elsif value.present?
+            - if rule[:type] == :cardinal_direction
+              %span.fa.fa-arrow-up{ style: "transform: rotateZ(#{value}deg);" }
+            - else
+              = "#{value}#{rule[:unit]}"
+          - else
+            %span.fa.fa-question-circle-o

@@ -41,8 +41,7 @@ document.addEventListener 'turbolinks:load', ->
     bg = new Image()
     bg.src = '<%= image_path("compass-base.png") %>'
     bg.onload = ->
-      cx.drawImage(bg, 0, 0, 200, 200)
-      drawRange(cx, vals)
+      drawRange(cx, vals, bg)
 
 
     # init sliders
@@ -66,12 +65,12 @@ document.addEventListener 'turbolinks:load', ->
       vals = slider.get()
       # set hiddenfield value
       e.next('input.rule-value').val(vals.join(','))
-      drawRange(cx, vals)
+      drawRange(cx, vals, bg)
 
     # draw new range onto canvas
     slider.on 'update', ->
       vals = slider.get()
-      drawRange(cx, vals)
+      drawRange(cx, vals, bg)
 
   # init toggle matches
   $('.toggle-matches').click ->
@@ -129,22 +128,29 @@ mapCardinalDir = (v) ->
     true # coffee script automatically returns last value, activated = false would break the loop
   return JSON.stringify(obj)
 
-@drawRange = (cx, range) ->
-  north_offset = 270 / 180 * Math.PI
-  start = north_offset + parseFloat(range[0]) / 180 * Math.PI
-  end = north_offset + parseFloat(range[1]) / 180 * Math.PI
-  if start > end
-    end = end + 2*Math.PI
+@drawRange = (cx, range, bg) ->
+  # values
+  radius = 75
+  northOffset = 270
+  rangeColor = '#000'
 
-  # draw image
-  radius = 70
+  # calculate inverted range
+  start = parseFloat(range[1])
+  end = parseFloat(range[0])
+  if start > end
+    end = end + 360.0
+
+
+  # convert to pi format
+  start = (start + northOffset) / 180 * Math.PI
+  end = (end + northOffset) / 180 * Math.PI
+
+  # draw background
+  cx.drawImage(bg, 0, 0, 200, 200)
+
+  # draw inverted range
   cx.beginPath()
-  cx.fillStyle = '#ffd177'
-  cx.arc(100, 100, radius, 0, 2*Math.PI)
-  cx.fill()
-  cx.closePath()
-  cx.beginPath()
-  cx.fillStyle = '#00b2ff'
+  cx.fillStyle = rangeColor
   cx.arc(100, 100, radius, start, end)
   cx.lineTo(100, 100)
   cx.fill()

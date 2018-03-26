@@ -1,4 +1,4 @@
-.col-sm-6.mt-3
+.col-lg-6.mt-3
   .card{ class: rule[:activated] ? 'border-success' : '' }
     .card-header
       %span.fa{ class: rule[:icon] }
@@ -10,11 +10,11 @@
         .range-slider{ id: rule[:key], 'data-value': rule[:value] || '0,0', 'data-scale': rule[:values].to_json, 'data-min': rule[:values].min, 'data-max': rule[:values].max, 'data-unit': rule[:unit], 'data-digits': rule[:digits] || 0 }
         = hidden_field_tag :rule_value, (rule[:value] || '0,0'), class: 'rule-value', id: rule[:key]
       - elsif rule[:type] == :cardinal_direction
-        .row
-          .col-sm-9
+        .row.align-items-center.justify-content-center
+          .col-md-8
             .cardinal-direction{ id: rule[:key], 'data-value': rule[:value] || '0', 'data-scale': rule[:values].to_json, 'data-min': rule[:values].min, 'data-max': rule[:values].max, 'data-unit': rule[:unit], 'data-digits': rule[:digits] || 0 }
             = hidden_field_tag :rule_value, (rule[:value] || '0,0'), class: 'rule-value', id: rule[:key]
-          .col-sm-3
+          .col-6.col-md-4
             %canvas.cardinal-direction-canvas{ id: "#{rule[:key]}_canvas", height: '200', width: '200' }
       - elsif rule[:type] == :select
         = select_tag rule[:key], options_for_select(rule[:values], rule[:value]), id: rule[:key],
