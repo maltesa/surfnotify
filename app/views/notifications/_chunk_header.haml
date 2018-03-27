@@ -1,0 +1,6 @@
+.row
+  .col.small Hour
+  - notification.params_with_rules.each do |rule|
+    .col{ class: rule[:activated] ? 'text-primary' : '' }
+      %p.small
+        = rule[:name]

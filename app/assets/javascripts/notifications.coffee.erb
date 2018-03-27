@@ -75,7 +75,7 @@ document.addEventListener 'turbolinks:load', ->
   # init toggle matches
   $('.toggle-matches').click ->
     e = $(this)
-    e.closest('.card').find('.additional-match').toggle()
+    e.closest('.card').find('.additional-match').slideToggle()
     e.children('.up').toggle()
     e.children('.down').toggle()
     return false

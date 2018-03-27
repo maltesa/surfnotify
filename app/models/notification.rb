@@ -68,7 +68,13 @@ class Notification < ApplicationRecord
     # update cache if forecast data is newer then this
     apply_rules_and_notify if forecast.updated_at > updated_at
     # return filtered forecasts
-    filtered_forecast_cache || []
+    fc = filtered_forecast_cache || []
+    Hash[fc.map { |ts, fc| [DateTime.strptime(ts, '%s'), fc] }]
+  end
+
+  def matching_forecasts_by_day
+    # parse timestamp and group by day
+    matching_forecasts.group_by{ |date, _| date.day }
   end
 
   def params_with_rules

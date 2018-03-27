@@ -230,4 +230,6 @@ en:
       default: "%a, %d %b %I:%M %p"
       long: "%B %d, %Y %I:%M %p"
       short: "%d %b %I:%M %p"
+      day: "%A %d, %B"
+      time: "%I%P"
       pm: pm
