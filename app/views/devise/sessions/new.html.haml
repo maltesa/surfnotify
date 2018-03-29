@@ -1,21 +1,14 @@
-.row
-  .col
+.row.justify-content-center.mt-5
+  .col-12.col-lg-7
     %h1 Log in
     %hr/
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .form-group
-        = f.label :email
-        = f.email_field :email, autofocus: true, class: 'form-control'
-      .form-group
-        = f.label :password
-        = f.password_field :password, autocomplete: 'off', class: 'form-control'
-      - if devise_mapping.rememberable?
-        .form-check
-          = f.label :remember_me, class: 'form-check-label' do
-            = f.check_box :remember_me, class: 'form-check-input'
-            Remember me
-      .actions
-        = f.submit 'Log in', class: 'btn btn-outline-primary btn-lg'
-      %hr/
-      .alternatives
-        = render partial: 'devise/shared/links', locals: { link_class: 'card-link' }
+      .form-sign
+        = f.label :email, class: 'sr-only'
+        = f.email_field :email, autofocus: true, class: 'form-control', id: 'inputemail', placeholder: 'E-Mail'
+        = f.label :password, class: 'sr-only'
+        = f.password_field :password, autocomplete: 'off', class: 'form-control', id: 'inputpassword', placeholder: 'Password'
+        = f.submit 'Log in', class: 'btn btn-outline-primary btn-lg btn-block'
+    %hr/
+    .alternatives
+      = render partial: 'devise/shared/links', locals: { link_class: 'btn btn-outline-dark btn-sm card-link' }
