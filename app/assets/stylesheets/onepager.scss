@@ -1,0 +1,35 @@
+@import 'bootstrap';
+
+.navbar-brand > img {
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.navbar-brand {
+  font-size: 2em;
+}
+
+#cover {
+  background: image-url('cabedelo.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+#jumbo {
+  margin-top: 13%;
+  margin-bottom: 13%;
+}
+
+@include media-breakpoint-up(md) {
+  #jumbo {
+    margin-top: 5%;
+    margin-bottom: 10%;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  #jumbo {
+    margin-top: 15%;
+    margin-bottom: 15%;
+  }
+}

@@ -1,6 +1,6 @@
-.row.justify-content-center.mt-5
-  .col-12.col-lg-7
-    %h1 Log in
+.row.justify-content-center
+  .col-12.col-lg-7.mt-5.mb-5
+    %h1.display-4.text-light Log in
     %hr/
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-sign
@@ -8,7 +8,7 @@
         = f.email_field :email, autofocus: true, class: 'form-control', id: 'inputemail', placeholder: 'E-Mail'
         = f.label :password, class: 'sr-only'
         = f.password_field :password, autocomplete: 'off', class: 'form-control', id: 'inputpassword', placeholder: 'Password'
-        = f.submit 'Log in', class: 'btn btn-outline-primary btn-lg btn-block'
+        = f.submit 'Log in', class: 'btn btn-primary btn-lg btn-block'
     %hr/
     .alternatives
-      = render partial: 'devise/shared/links', locals: { link_class: 'btn btn-outline-dark btn-sm card-link' }
+      = render partial: 'devise/shared/links', locals: { link_class: 'btn btn-dark btn-sm card-link' }

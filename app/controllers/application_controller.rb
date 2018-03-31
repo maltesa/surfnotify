@@ -2,12 +2,24 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_raven_context
   before_action :authenticate_user!
+  layout :layout_by_resource
+
+  private
+
 
   def after_sign_in_path_for(resource)
     notifications_path
   end
 
   private
+
+  def layout_by_resource
+    if devise_controller?
+      'onepager'
+    else
+      'application'
+    end
+  end
 
   def set_raven_context
     user_id = current_user.id unless current_user.nil?

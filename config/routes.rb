@@ -2,13 +2,16 @@ require 'resque/server'
 
 Rails.application.routes.draw do
   root to: 'pages#index'
+  get 'pages/terms', as: :terms_page
+
   resources :notifications, except: [:show]
   get 'notifications/silence/:id' => 'notifications#toggle_silent', as: :silence_notification
-  get 'pages/terms'
   get 'provider/msw/find/:query' => 'provider#msw_search_spots', as: :msw_autocomplete
+
   get 'settings' => 'settings#edit', as: :settings
   put 'settings' => 'settings#update'
   patch 'settings' => 'settings#update'
+
   devise_for :users, controllers: { sessions: 'users/sessions' }
 
   ## Resque Webinterface

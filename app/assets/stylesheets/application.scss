@@ -1,17 +1,23 @@
 @import 'bootstrap';
+@import 'footer';
+@import 'login-signup';
+@import 'notifications';
 @import 'font-awesome';
 @import 'selectize';
 @import 'selectize.default';
 @import 'nouislider';
-@import 'login-signup';
-@import 'notifications';
 
 main.container {
   margin-top: 20px;
+  margin-bottom: 90px;
 }
 
 .navbar-brand > img {
-  height: 30px;
+  height: 33px;
+}
+
+.navbar-brand {
+  font-family: 'Oswald', sans-serif;
 }
 
 label.required:after {
@@ -23,5 +29,5 @@ label.required:after {
 }
 
 .dev-bg {
-  background-color: #f48f42 !important;
+  background: green !important;
 }
