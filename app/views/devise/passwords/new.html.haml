@@ -1,5 +1,5 @@
 .row.justify-content-center
-  .col-12.col-lg-7.mt-5.mb-5
+  .col-12.col-lg-7.my-auto
     %h1.display-4.text-light Password?
     %hr/
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|

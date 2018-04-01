@@ -1,4 +1,4 @@
-.row
+.row.no-scale
   .col
     #jumbo
       .text-light.d-none.d-xl-block.d-lg-block
@@ -14,8 +14,9 @@
         %br
         %br
       .text-light.d-md-none
-        %h2 Never miss a good surf.
-        %h3.mt-3 Get notified!
+        %h3 Never miss a good surf.
+        %h4 Get notified!
         %br
       %p.lead
-        = link_to 'Sign up', new_registration_path(:user), class: 'btn-primary btn-lg'
+        - unless current_user
+          = link_to 'Sign up', new_registration_path(:user), class: 'btn-primary btn-lg'

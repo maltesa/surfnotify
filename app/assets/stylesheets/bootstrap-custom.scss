@@ -1,0 +1,10 @@
+// add additional spacers
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge((
+  6: ($spacer * 4.5),
+  7: ($spacer * 6),
+  8: ($spacer * 7.5),
+  9: ($spacer * 9),
+  10: ($spacer * 10.5),
+), $spacers);

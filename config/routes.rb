@@ -12,7 +12,14 @@ Rails.application.routes.draw do
   put 'settings' => 'settings#update'
   patch 'settings' => 'settings#update'
 
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: {
+    confirmations: 'users/confirmations',
+    omnoauth_callbacks: 'users/omnoauth_callbacks',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    unlocks: 'users/unlocks'
+  }
 
   ## Resque Webinterface
   resque_web_constraint = lambda do |request|

@@ -39,6 +39,8 @@
           .up
             %span.fa.fa-chevron-up
             Hide all matches
+      - elsif notification.matching_forecasts_by_day.size == 1
+        No further matches
       - else
         No match
 %br

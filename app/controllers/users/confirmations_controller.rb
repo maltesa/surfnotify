@@ -1,4 +1,6 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
+  layout 'onepager', only: [:new, :create]
+
   # GET /resource/confirmation/new
   # def new
   #   super

@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand-md{ class: classes }
+%nav.navbar.navbar-expand-lg{ class: classes }
   .container
     = link_to root_path, class: 'navbar-brand' do
       = image_tag 'logo-sn.png'
@@ -20,10 +20,6 @@
               = link_to 'Your Account', edit_user_registration_path, class: 'dropdown-item'
               = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
       - else
-        .form-inline.ml-auto
-          = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-            = f.label :email, class: 'sr-only'
-            = f.email_field :email, class: 'form-control', placeholder: 'E-Mail'
-            = f.label :password, class: 'sr-only'
-            = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
-            = f.submit 'Log in', class: 'btn btn-dark'
+        %ul.navbar-nav.ml-auto
+          %li.nav-item
+            = link_to 'Log in', new_session_path(:user), class: 'btn btn-lg btn-light'

@@ -14,11 +14,43 @@
     = favicon_link_tag 'favicon.ico'
     %link{ href: 'https://fonts.googleapis.com/css?family=Oswald', rel: 'stylesheet' }
   %body
-    = render partial: 'layouts/navigation', locals: { classes: 'bg-light navbar-light' }
+    = render partial: 'layouts/navigation', locals: { classes: 'navbar-dark bg-primary' }
     %main{ role: 'main' }
       #cover
         .container
           = yield
-    .container.pt-3
-      = render 'layouts/messages'
+      .container.pt-5.mb-8
+        .row
+          .col
+            = render 'layouts/messages'
+            .card-group
+              .card
+                .card-body.text-center
+                  %h3.card-title
+                    Create
+                  %hr
+                  %p
+                    = fa_icon 'comment-o 5x'
+                  %p.card-text
+                    Select several spots and weather paramters you want to receive notifications for.
+              .card
+                .card-body.text-center
+                  %h3.card-title
+                    Relax
+                  %hr
+                  %p
+                    = fa_icon 'coffee 5x'
+                  %p.card-text
+                    Go to the gym. Drink a coffee. Relax!
+              .card
+                .card-body.text-center
+                  %h3.card-title
+                    Get Notified
+                  %hr
+                  %p.text-primary
+                    = fa_icon 'bell-o 5x'
+                  %p.card-text
+                    You will get notified as soon as a forecast matches the parameters of one of
+                    your notifications.
+
     = render 'layouts/footer'
