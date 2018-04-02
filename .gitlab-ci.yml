@@ -24,8 +24,6 @@ before_script:
 build-image:
   stage: build
   script:
-    - echo $CI_BUILD_REF > ./meta/hash
-    - echo $CI_BUILD_REF_NAME > ./meta/branch
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
