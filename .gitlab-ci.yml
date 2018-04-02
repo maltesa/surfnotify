@@ -20,12 +20,10 @@ variables:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: ""
 
-before_script:
-  - docker login -u reg -p $DOCKER_REG_PW $CONTAINER_REGISTRY_DOMAIN
-
 build-image:
   stage: build
   script:
+    - docker login -u reg -p $DOCKER_REG_PW $CONTAINER_REGISTRY_DOMAIN
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
@@ -46,6 +44,7 @@ release-image:
     - build-image
     - test-image
   script:
+    - docker login -u reg -p $DOCKER_REG_PW $CONTAINER_REGISTRY_DOMAIN
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
