@@ -20,6 +20,9 @@ variables:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: ""
 
+before_script:
+  - docker login -u reg -p $DOCKER_REG_PW $CONTAINER_REGISTRY_DOMAIN
+
 build-image:
   stage: build
   script:
