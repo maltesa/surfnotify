@@ -2,7 +2,6 @@ image: docker:latest
 
 services:
   - docker:dind
-  - postgres:latest
 
 stages:
 - build
@@ -33,11 +32,14 @@ build-image:
 
 test-image:
   stage: test
+  image: $CONTAINER_TEST_IMAGE
   dependencies:
     - build-image
+  services:
+    - postgres:latest
   script:
-    - docker run -e RAILS_ENV=test -e POSTGRES_HOST=postgres $CONTAINER_TEST_IMAGE rails db:create db:schema:load
-    - docker run -e RAILS_ENV=test -e POSTGRES_HOST=postgres $CONTAINER_TEST_IMAGE rails test
+    - rails db:create db:schema:load
+    - rails test
 
 release-image:
   stage: release
