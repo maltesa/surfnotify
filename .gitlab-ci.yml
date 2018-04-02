@@ -5,17 +5,55 @@ services:
 
 stages:
 - build
+- test
+- release
+# - deploy
 
 variables:
   DOCKER_DRIVER: overlay2
-  CONTAINER_IMAGE: reg.surfnotify.com/surfnotify:latest
   SECRET_KEY_BASE: 89ffc4886ed96eb949d8f6f29a1cbd3840f91371e641ad6a609b8fadd074b0d1452772f535d1e2fbe8170c0c4aa86ae7d4921a7543c3d80e86ba43697cc2eb19
+  CONTAINER_IMAGE_NAME: surfnotify
+  CONTAINER_REGISTRY_DOMAIN: registry.gitlab.com
+  CONTAINER_RELEASE_IMAGE: $CONTAINER_REGISTRY_DOMAIN/$CONTAINER_IMAGE_NAME:latest
+
 
 before_script:
-  - docker login -u reg -p $DOCKER_REG_PW reg.surfnotify.com
+  - CONTAINER_TEST_IMAGE=$CONTAINER_REGISTRY_DOMAIN/$CONTAINER_IMAGE_NAME:`echo $CI_BUILD_REF_NAME | sed -e 's/[\/|.]/-/g'`
+  - docker login -u reg -p $DOCKER_REG_PW $CONTAINER_REGISTRY_DOMAIN
 
-build:
+build-image:
   stage: build
   script:
-    - docker build --pull -t $CONTAINER_IMAGE .
-    - docker push $CONTAINER_IMAGE
+    - echo $CI_BUILD_REF > ./meta/hash
+    - echo $CI_BUILD_REF_NAME > ./meta/branch
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+test-image:
+  stage: test
+  dependencies:
+    - build-image
+  script:
+    - docker run -e "RAILS_ENV=test" $CONTAINER_TEST_IMAGE rails db:create db:migrate
+    - docker run -e "RAILS_ENV=test" $CONTAINER_TEST_IMAGE rails test
+
+release-image:
+  stage: release
+  dependencies:
+    - build-image
+    - test-image
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - master
+
+# deploy-image:
+#   stage: deploy
+#   dependencies:
+#     - build-image
+#     - test-image
+#     - release-image
+#   only:
+#     - master

@@ -12,12 +12,13 @@ development:
 test:
   <<: *default
   database: surfnotify_test
-  host: docker
-  username: postgres
+  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
   <<: *default
   database: surfnotify_production
-  host: postgres
+  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
   username: <%= ENV['POSTGRES_USER'] %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
