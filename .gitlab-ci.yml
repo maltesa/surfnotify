@@ -15,6 +15,7 @@ variables:
   CONTAINER_IMAGE_NAME: surfnotify
   CONTAINER_REGISTRY_DOMAIN: reg.surfnotify.com
   CONTAINER_RELEASE_IMAGE: $CONTAINER_REGISTRY_DOMAIN/$CONTAINER_IMAGE_NAME:latest
+  POSTGRES_PASSWORD: secretpassword
 
 
 before_script:
@@ -32,8 +33,10 @@ test-image:
   dependencies:
     - build-image
   script:
-    - docker run -e "RAILS_ENV=test" $CONTAINER_TEST_IMAGE rails db:create db:migrate
-    - docker run -e "RAILS_ENV=test" $CONTAINER_TEST_IMAGE rails test
+    - docker run --name postgres-test -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -p 5432:5432 -d postgres
+    - docker run -e RAILS_ENV=test -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD $CONTAINER_TEST_IMAGE rails db:create db:migrate
+    - docker run -e RAILS_ENV=test -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD $CONTAINER_TEST_IMAGE rails test
+    - docker stop postgres-test
 
 release-image:
   stage: release
