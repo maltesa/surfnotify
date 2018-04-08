@@ -35,6 +35,8 @@ test-image:
     - build-image
   services:
     - postgres:latest
+  variables:
+    RAILS_ENV: 'test'
   script:
     - rails db:create db:schema:load
     - rails test
