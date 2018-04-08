@@ -1,9 +1,10 @@
 GIT
   remote: ssh://git@git.surfnotify.com:10022/maltes-projekte/msw-dataprovider.git
-  revision: 69500688bd0ac8cbe774260696d15694fc39e920
+  revision: 6ce774c7e345ad7152731567813a2defc33a81b7
   branch: master
   specs:
-    msw (0.0.15)
+    msw (0.0.17)
+      nokogiri
 
 GEM
   remote: https://rubygems.org/
