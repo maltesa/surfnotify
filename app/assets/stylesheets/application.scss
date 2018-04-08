@@ -32,3 +32,10 @@ label.required:after {
 .dev-bg {
   background: green !important;
 }
+
+@include media-breakpoint-down(md) {
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+}

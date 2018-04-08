@@ -1,0 +1,14 @@
+- headings = notification.params_with_rules.group_by{ |p| p[:name].split(' ').first }
+- if first_match
+  %tr
+    %th.small{ scope: 'col' }
+    - headings.each do |group, params|
+      %th.small{ colspan: params.size, scope: 'col' }= params.size > 1 ? group : ''
+%tr
+  %th.small{ scope: 'col' } Hour
+  - headings.each do |group, params|
+    - if params.size > 1
+      - params.each do |p|
+        %th.small= p[:name].split(' ')[1..-1].join(' ')
+    - else
+      %th.small= params.first[:name]

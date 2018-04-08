@@ -16,9 +16,6 @@ variables:
   CONTAINER_REGISTRY_DOMAIN: reg.surfnotify.com
   CONTAINER_TEST_IMAGE: $CONTAINER_REGISTRY_DOMAIN/$CONTAINER_IMAGE_NAME:$CI_COMMIT_SHA
   CONTAINER_RELEASE_IMAGE: $CONTAINER_REGISTRY_DOMAIN/$CONTAINER_IMAGE_NAME:latest
-  POSTGRES_DB: surfnotify_test
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: ""
 
 build-image:
   stage: build
@@ -34,6 +31,11 @@ test-image:
     - build-image
   services:
     - postgres:latest
+  variables:
+    POSTGRES_HOST: postgres
+    POSTGRES_DB: surfnotify_test
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: ""
   script:
     - rails db:create db:schema:load
     - rails test

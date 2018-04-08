@@ -6,13 +6,16 @@ canvas.cardinal-direction-canvas {
   width: 100%;
 }
 
+.first-match td, .additional-match td {
+  border-top: 0 !important;
+}
+
 .additional-match {
-  margin-top: 5px;
   display: none;
 }
 
-.first-match {
-  display: block;
+.additional-match h5 {
+  margin-top: 15px;
 }
 
 .toggle-matches > .up {
