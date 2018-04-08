@@ -27,7 +27,7 @@ document.addEventListener 'turbolinks:load', ->
     # save value if slider was moved
     slider = this.noUiSlider
     slider.on 'set', ->
-      vals = slider.get()
+      vals = slider.get().map (v) -> unitFormatter('', '', digits).to(v)
       e.next('input.rule-value').val(vals.join(','))
 
   # init sliders for rules
@@ -62,7 +62,7 @@ document.addEventListener 'turbolinks:load', ->
     # save value if slider was moved
     slider = this.noUiSlider
     slider.on 'set', ->
-      vals = slider.get()
+      vals = slider.get().map (v) -> unitFormatter('', '', digits).to(v)
       # set hiddenfield value
       e.next('input.rule-value').val(vals.join(','))
       drawRange(cx, vals, bg)

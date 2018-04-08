@@ -12,7 +12,7 @@
       - elsif rule[:type] == :cardinal_direction
         .row.align-items-center.justify-content-center
           .col-md-8
-            .cardinal-direction{ id: rule[:key], 'data-value': rule[:value] || '0', 'data-scale': rule[:values].to_json, 'data-min': rule[:values].min, 'data-max': rule[:values].max, 'data-unit': rule[:unit], 'data-digits': rule[:digits] || 0 }
+            .cardinal-direction{ id: rule[:key], 'data-value': rule[:value] || '0,0', 'data-scale': rule[:values].to_json, 'data-min': rule[:values].min, 'data-max': rule[:values].max, 'data-unit': rule[:unit], 'data-digits': rule[:digits] || 0 }
             = hidden_field_tag :rule_value, (rule[:value] || '0,0'), class: 'rule-value', id: rule[:key]
           .col-6.col-md-4
             %canvas.cardinal-direction-canvas{ id: "#{rule[:key]}_canvas", height: '200', width: '200' }
