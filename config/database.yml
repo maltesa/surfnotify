@@ -11,8 +11,8 @@ development:
 
 test:
   <<: *default
-  database: surfnotify_test
-  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  database: <%= ENV['POSTGRES_TEST_DB'] || 'surfnotify_test' %>
+  host: <%= ENV['POSTGRES_TEST_HOST'] || 'localhost' %>
   username: <%= ENV['POSTGRES_TEST_USER'] || 'postgres' %>
   password: <%= ENV['POSTGRES_TEST_PASSWORD'] %>
 
