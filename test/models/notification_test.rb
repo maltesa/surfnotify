@@ -17,7 +17,7 @@ class NotificationTest < ActiveSupport::TestCase
     end
   end
 
-  test 'don notify if notification is silent' do
+  test 'dont notify if notification is silent' do
     # this notification belongs to one user and the rules will match its related forecast
     notification = notifications(:matching_notification)
     notification.silent = true

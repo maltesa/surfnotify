@@ -38,7 +38,7 @@ class Diff
     now_ts = Time.now.to_i
     olf_diff_ts = @old.keys - @new.keys
     keys = olf_diff_ts.reject { |ts| ts.to_i < now_ts.to_i }
-    @passed_matches = @old.values_at(*keys)
+    @passed_matches = @old.select{ |k, _| keys.include?(k) }
   end
 
   # are there former matches which do not match in the new data?

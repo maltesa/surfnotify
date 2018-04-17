@@ -4,47 +4,46 @@ matching_notification:
   spot: http://www.magicseaweed.com/Lagide-Surf-Report/195/
   rules:
     tide:
-      value: all tides
-      activated: false
+      value:
+      - high
+      - low
+      activated: true
     wind_dir:
-      value: '0,0'
-      activated: false
+      value: 0.0,360.0
+      activated: true
     swell_dir:
-      value: '0,0'
-      activated: false
+      value: '360,0'
+      activated: true
     swell_size:
-      value: '1,13'
+      value: 0.2,10
       activated: true
     wind_speed:
-      value: '0,0'
-      activated: false
+      value: '0,100'
+      activated: true
     probability:
-      value: '0,0'
-      activated: false
+      value: '75,100'
+      activated: true
     swell_period:
-      value: '18,30'
+      value: 12.0,30.00
       activated: true
     weather_temp:
-      value: "-20,-20"
-      activated: false
-    weather_descr:
-      value: []
-      activated: false
+      value: 0.00,30.30
+      activated: true
   created_at: '2018-01-13T15:57:42.406Z'
   updated_at: '2018-01-13T16:00:26.878Z'
   filtered_forecast_cache:
-    '1516201200':
-      wind_dir: 12
-      swell_dir:
-      - 333.79
-      - 6
-      swell_size:
-      - 5.8
-      - 1.7
-      wind_speed: 44
-      probability: 95
-      swell_period:
-      - 18
-      - 6
-      weather_temp: 13
-      weather_descr: Sunny
+    '<%= (DateTime.now + 1.hour).strftime("%s")[0..-3] + "00" %>':
+      new: true
+      tide:
+        type: low
+        height: 1.44m
+        offset: 6960
+      wind_dir: 323.0
+      swell_dir: 298.26
+      swell_size: 3.9
+      wind_speed: 25.0
+      probability: 100.0
+      swell_period: 14.0
+      weather_temp: 13.0
+      breaking_size: 1.8
+      weather_descr: Brief Showers Possible
