@@ -9,7 +9,7 @@ The forecast matches your criteria at these times (*forecast changed compared to
 
 <% end %>
 <% if @passed_matches.present? %>
-It hurts us to announce it but your we have to withdraw our former notification(s) for these dates since the forecast does not match your criteria anymore:
+It hurts us to announce it, but we have to withdraw our former notification(s) for these dates since the forecast does not match your criteria anymore:
 <%= @passed_matches.keys.map { |ts| timestamp_to_fdate(ts) }.join(', ') %>
 
 <% end %>
