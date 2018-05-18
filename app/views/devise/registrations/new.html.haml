@@ -12,7 +12,8 @@
         = f.label :password_confirmation, class: 'sr-only'
         = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Password confirmation'
         .actions
-          = f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block'
+          = render partial: 'devise/shared/check_privacy_policy', locals: { target: '#signup' }
+          = f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block', id: 'signup', disabled: true
     %hr/
     .alternatives
       = render partial: 'devise/shared/links', locals: { link_class: 'btn btn-dark btn-sm card-link' }

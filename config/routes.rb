@@ -3,6 +3,7 @@ require 'resque/server'
 Rails.application.routes.draw do
   root to: 'pages#index'
   get 'pages/terms', as: :terms_page
+  get 'pages/privacy_policy', as: :privacy_policy_page
 
   resources :notifications, except: [:show]
   get 'notifications/silence/:id' => 'notifications#toggle_silent', as: :silence_notification

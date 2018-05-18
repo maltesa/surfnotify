@@ -8,7 +8,8 @@
         = f.email_field :email, autofocus: true, class: 'form-control', id: 'inputemail', placeholder: 'E-Mail'
         = f.label :password, class: 'sr-only'
         = f.password_field :password, autocomplete: 'off', class: 'form-control', id: 'inputpassword', placeholder: 'Password'
-        = f.submit 'Log in', class: 'btn btn-primary btn-lg btn-block'
+        = render partial: 'devise/shared/check_privacy_policy', locals: { target: '#signin' }
+        = f.submit 'Log in', class: 'btn btn-primary btn-lg btn-block', disabled: true, id: 'signin'
     %hr/
     .alternatives
       = render partial: 'devise/shared/links', locals: { link_class: 'btn btn-dark btn-sm card-link' }
