@@ -1,5 +1,3 @@
 PullForecastsJob:
-  every:
-    - '2h'
-    - :first_in: '120s'
+  cron: "0 7 * * *"
   queue: data_collectors
