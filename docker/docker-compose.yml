@@ -33,4 +33,3 @@ networks:
   default:
     external:
       name: internal
-  surfnotify:
