@@ -31,6 +31,9 @@ RUN RAILS_ENV=production bundle exec rake assets:precompile
 COPY ./docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# expose port 3000
+EXPOSE 3000
+
 LABEL maintainer="Malte Hecht <malte.fisch@posteo.de>"
 
 ENTRYPOINT [ "/entrypoint.sh" ]

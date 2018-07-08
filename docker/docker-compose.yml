@@ -4,6 +4,7 @@ services:
   app:
     image: reg.surfnotify.com/surfnotify:latest
     restart: always
+    hostname: surfnotify_production
     environment: &settings
       MAILER_ADDRESS: ${MAILER_ADDRESS}
       MAILER_PW: ${MAILER_PW}
