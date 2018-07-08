@@ -27,8 +27,11 @@ RUN apk del git openssh && \
 # precompile assets for production
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
+# setup entrypoint
+COPY ./docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 LABEL maintainer="Malte Hecht <malte.fisch@posteo.de>"
 
-# make startscript executable
-RUN chmod +x /app/startapp.sh
-CMD ["/app/startapp.sh"]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "app" ]

@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  app:
+    image: reg.surfnotify.com/surfnotify:latest
+    restart: always
+    environment: &settings
+      MAILER_ADDRESS:	info@surfnotify.com
+      MAILER_PW:	Px9a4D9ca42q
+      POSTGRES_HOST:	postgres
+      POSTGRES_USER:	surfnotify
+      POSTGRES_PASSWORD:	Yjq7KJaiRTZVh8xa
+      RAILS_ENV:	production
+      RAILS_SERVE_STATIC_FILES:	true
+      RAILS_LOG_TO_STDOUT: 'true'
+      REDIS_URL:	redis:6379
+      SECRET_KEY_BASE:	b67a210b8a0757cf48d9a68b672fd4f45c4a6cd089e78bda990980136b44246dccf7e51fb478a17f12dca66acabeee086a509be482d0a7c5ae9e156cefa85422
+  worker:
+    image: reg.surfnotify.com/surfnotify:latest
+    command: worker
+    restart: always
+    environment: 
+      <<: *settings
+  scheduler:
+    image: reg.surfnotify.com/surfnotify:latest
+    command: scheduler
+    restart: always
+    environment: 
+      <<: *settings
+
+networks:
+  default:
+    external:
+      name: internal
+  surfnotify:
