@@ -15,7 +15,7 @@ case "$1" in
   worker)
     # start resque workers 
     bundle exec rake resque:prune_dead_workers
-    exec COUNT=3 LOGGING=1 QUEUE=* bundle exec rake resque:workers
+    exec env COUNT=3 LOGGING=1 QUEUE=* bundle exec rake resque:workers
     ;;
   scheduler)
     # start resque scheduler
