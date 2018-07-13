@@ -16,20 +16,28 @@ services:
       RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT}
       REDIS_URL: ${REDIS_URL}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    networks: 
+      internal:
+        aliases:
+          - surfnotify_production
   worker:
     image: reg.surfnotify.com/surfnotify:latest
     command: 'worker'
     restart: always
     environment:
       <<: *settings
+    networks: 
+      - internal
   scheduler:
     image: reg.surfnotify.com/surfnotify:latest
     command: 'scheduler'
     restart: always
     environment:
       <<: *settings
+    networks: 
+      - internal
 
 networks:
-  default:
+  internal:
     external:
       name: internal
