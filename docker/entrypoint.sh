@@ -9,11 +9,11 @@ case "$1" in
     ;;
   app)
     # starting server
-    rm /app/tmp/pids/* || true
+    rm -f /app/tmp/pids/* || true
     exec puma -C config/puma.rb
     ;;
   worker)
-    # start resque workers 
+    # start resque workers
     bundle exec rake resque:prune_dead_workers
     env COUNT=3 LOGGING=1 QUEUE=* exec bundle exec rake resque:workers
     ;;
