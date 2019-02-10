@@ -21,11 +21,9 @@ variables:
 
 build-image:
   stage: build
-  variables:
-    SECRET_KEY_BASE: ${SECRET_KEY_BASE}
   script:
     - docker login -u $DOCKER_REG_USER -p $DOCKER_REG_PW $CONTAINER_REGISTRY_DOMAIN
-    - docker build -f ./docker/Dockerfile --pull -t $CONTAINER_TEST_IMAGE .
+    - docker build -f ./docker/Dockerfile --build-arg SECRET_KEY_BASE=${SECRET_KEY_BASE} --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
 test-image:

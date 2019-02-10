@@ -25,7 +25,8 @@ RUN apk del git openssh && \
     rm -r ./deployment
 
 # precompile assets for production
-RUN RAILS_ENV=production bundle exec rake assets:precompile
+ARG SECRET_KEY_BASE
+RUN SECRET_KEY_BASE=${SECRET_KEY_BASE} RAILS_ENV=production bundle exec rake assets:precompile
 
 # setup entrypoint
 COPY ./docker/entrypoint.sh /entrypoint.sh
