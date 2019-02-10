@@ -15,6 +15,7 @@ services:
       RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT}
       REDIS_URL: ${REDIS_URL}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      SENTRY_DSN: ${SENTRY_DSN}
     networks:
       public:
   worker:
