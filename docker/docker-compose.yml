@@ -1,4 +1,4 @@
-version: '3.3'
+version: '2'
 
 services:
   app:
@@ -15,28 +15,26 @@ services:
       RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT}
       REDIS_URL: ${REDIS_URL}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
-    networks: 
-      internal:
-        aliases:
-          - surfnotify_production
+    networks:
+      public:
   worker:
     image: reg.surfnotify.com/surfnotify:latest
     command: 'worker'
     restart: always
     environment:
       <<: *settings
-    networks: 
-      - internal
+    networks:
+      - public
   scheduler:
     image: reg.surfnotify.com/surfnotify:latest
     command: 'scheduler'
     restart: always
     environment:
       <<: *settings
-    networks: 
-      - internal
+    networks:
+      - public
 
 networks:
-  internal:
+  public:
     external:
-      name: internal
+      name: public

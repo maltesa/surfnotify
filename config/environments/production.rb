@@ -93,9 +93,9 @@ Rails.application.configure do
   # mail delivery
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'mail.surfnotify.com',
+    address:              'smtp.zoho.com',
     port:                 587,
-    domain:               'surfnotify.com',
+    domain:               'siggi-app.de',
     user_name:            ENV['MAILER_ADDRESS'],
     password:             ENV['MAILER_PW'],
     authentication:       'plain',

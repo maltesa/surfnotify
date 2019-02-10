@@ -4,10 +4,10 @@ services:
   - docker:dind
 
 stages:
-- build
-- test
-- release
-# - deploy
+  - build
+  - test
+  - release
+  # - deploy
 
 variables:
   DOCKER_DRIVER: overlay2
