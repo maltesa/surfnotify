@@ -17,7 +17,8 @@ services:
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       SENTRY_DSN: ${SENTRY_DSN}
     networks:
-      public:
+      - public
+      - restricted
   worker:
     image: reg.surfnotify.com/surfnotify:latest
     command: 'worker'
@@ -26,6 +27,7 @@ services:
       <<: *settings
     networks:
       - public
+      - restricted
   scheduler:
     image: reg.surfnotify.com/surfnotify:latest
     command: 'scheduler'
@@ -34,8 +36,12 @@ services:
       <<: *settings
     networks:
       - public
+      - restricted
 
 networks:
   public:
     external:
       name: public
+  restricted:
+    external:
+      name: restricted
